@@ -58,3 +58,16 @@ buck-out/
 # Misc
 #
 .env
+package-lock.json
+yarn.lock
+
+ios/Podfile.lock
+ios/Pods/
+ios/main.jsbundle.meta
+
+android/keystore.propertiess
+android/app/src/main/res/drawable*
+android/app/release
+
+.env.production
+.env.staging
