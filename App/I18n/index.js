@@ -31,6 +31,8 @@ const translateOrFallback = (initialMsg, options) => {
   return localMsg
 }
 
+I18n.defaultLocale = I18n.currentLocale();
+I18n.locale = 'zh';
 export default {
   ...I18n,
   t: translateOrFallback

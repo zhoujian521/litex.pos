@@ -1,1 +1,8 @@
-{}
+{
+  "ReceiptTab": "收款",
+  "RecordTab": "账单",
+
+  "ReceiptTitle": "收款",
+  "RecordTitle": "账单"
+
+}

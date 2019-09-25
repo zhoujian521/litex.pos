@@ -1,9 +1,17 @@
 const colors = {
-  background: '#1F0808',
+  background: '#FFFFFF',
+  primary:'#317CDC',
+  secondary:'',
+  tertiary:'',
+  line: '#F7F7F7',
+  text001: '#333333',
+  text002: '#666666',
+  text003: '#999999s',
+
+
   clear: 'rgba(0,0,0,0)',
   facebook: '#3b5998',
   transparent: 'rgba(0,0,0,0)',
-  silver: '#F7F7F7',
   steel: '#CCCCCC',
   error: 'rgba(200, 0, 0, 0.8)',
   ricePaper: 'rgba(255,255,255, 0.75)',
@@ -20,8 +28,7 @@ const colors = {
   drawer: 'rgba(30, 30, 29, 0.95)',
   eggplant: '#251a34',
   border: '#483F53',
-  banner: '#5F3E63',
-  text: '#E0D7E5'
+  banner: '#5F3E63'
 }
 
 export default colors
