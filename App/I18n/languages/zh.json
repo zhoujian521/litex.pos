@@ -9,6 +9,9 @@
   "QRCodeTitle": "收款金额:",
   "QRCodeSubTitle": "法币金额:",
 
-  "RecommendPayment": "请使用 LITEX pay 扫一扫完成支付"
+  "RecommendPayment": "请使用 LITEX pay 扫一扫完成支付",
+
+  "Orders": "订单记录",
+  "Assets": "资金记录"
 
 }

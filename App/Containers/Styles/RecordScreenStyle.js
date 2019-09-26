@@ -1,6 +1,15 @@
-import { StyleSheet } from 'react-native'
-import { ApplicationStyles } from '../../Themes/'
+import { StyleSheet, PixelRatio } from 'react-native'
+import { ApplicationStyles, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
-  ...ApplicationStyles.screen
+  ...ApplicationStyles.screen,
+  tabBarStyle: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tabBarUnderline: {
+    backgroundColor: Colors.primary,
+    height: 5 / PixelRatio.get(),
+  },
 })

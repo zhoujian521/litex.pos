@@ -34,5 +34,8 @@
   "QRCodeTitle": "Payment amount:",
   "QRCodeSubTitle": "Legal Tender:",
 
-  "RecommendPayment": "Please use LITEX pay scan to complete the payment"
+  "RecommendPayment": "Please use LITEX pay scan to complete the payment",
+
+  "Orders": "Orders",
+  "Assets": "Assets"
 }
