@@ -8,6 +8,9 @@ import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-vi
 import Orders from '../Components/Orders';
 import Assets from '../Components/Assets';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+
 // Styles
 import styles from './Styles/RecordScreenStyle'
 
@@ -42,27 +45,29 @@ class RecordScreen extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.mainContainer}>
-        <Orders/>
-        {/* <ScrollableTabView
-          initialPage={0}
-          style={styles.tabBarStyle}
-          tabBarActiveTextColor={Colors.primary}
-          tabBarInactiveTextColor={Colors.text003}
-          tabBarUnderlineStyle={styles.tabBarUnderline}
-          renderTabBar={() => <DefaultTabBar />}
-          onChangeTab={(params) => this._onChangeTab(params)}
-        >
-          <View tabLabel={I18n.t('Orders')} style={styles.container}>
-            <Text>1111</Text>
-          </View>
-          <View tabLabel={I18n.t('Assets')} style={styles.container}>
-            <Text>2222</Text>
-          </View>
-        </ScrollableTabView> */}
-      </View>
-    )
+    return <ScrollableTabView
+      style={{ marginTop: Metrics.smallMargin }}
+      initialPage={0}
+      renderTabBar={() => <DefaultTabBar />}
+    >
+      <Orders tabLabel={I18n.t('Orders')} />
+      <Assets tabLabel={I18n.t('Assets')} />
+    </ScrollableTabView>;
+
+    // return (
+    //   <View style={styles.mainContainer}>
+    //     <ScrollableTabView
+    //       initialPage={0}
+    //       style={styles.tabBarStyle}
+    //       tabBarActiveTextColor={Colors.primary}
+    //       tabBarInactiveTextColor={Colors.text003}
+    //       tabBarUnderlineStyle={styles.tabBarUnderline}
+    //       renderTabBar={() => <DefaultTabBar />}
+    //       onChangeTab={(params) => this._onChangeTab(params)}
+    //     >
+    //     </ScrollableTabView>
+    //   </View>
+    // )
   }
 }
 

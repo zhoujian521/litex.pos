@@ -35,7 +35,7 @@ export default StyleSheet.create({
   },
   header: {
     backgroundColor: "#dddddd",
-    paddingHorizontal: Metrics.smallMargin,
-    paddingVertical: Metrics.smallMargin,
+    paddingHorizontal: Metrics.baseMargin,
+    paddingVertical: Metrics.baseMargin,
   }
 })

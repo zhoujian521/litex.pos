@@ -12,8 +12,8 @@ import styles from './Styles/NavigationStyles'
 import Colors from '../Themes/Colors'
 
 const BottomTabNav = createBottomTabNavigator({
-  Record: { screen: RecordScreen },
   Receipt: { screen: ReceiptScreen },
+  Record: { screen: RecordScreen }
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: false,

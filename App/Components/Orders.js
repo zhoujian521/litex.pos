@@ -5,16 +5,6 @@ import styles from './Styles/OrdersStyle'
 import RefreshListView, { RefreshState } from './RefreshListView'
 
 class Orders extends Component {
-  // // Prop type warnings
-  // static propTypes = {
-  //   someProperty: PropTypes.object,
-  //   someSetting: PropTypes.bool.isRequired,
-  // }
-  //
-  // // Defaults for props
-  // static defaultProps = {
-  //   someSetting: false
-  // }
 
   _onRefresh = () => {
     console.log('============_onRefresh========================');
@@ -44,7 +34,7 @@ class Orders extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.header}>已经是最新数据了</Text>
+          <Text>已经是最新数据了</Text>
         </View>
         <RefreshListView
           style={styles.container}
