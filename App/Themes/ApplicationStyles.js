@@ -51,7 +51,7 @@ const ApplicationStyles = {
     paddingBottom: Metrics.doubleBaseMargin,
     borderBottomColor: Colors.border,
     borderBottomWidth: 1,
-    marginBottom: Metrics.baseMargin
+    marginBottom: Metrics.baseMarsssgin
   },
   darkLabel: {
     fontFamily: Fonts.type.bold,

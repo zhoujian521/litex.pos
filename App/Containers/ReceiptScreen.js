@@ -7,6 +7,7 @@ import I18n from '../I18n'
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import { PaymentConfig, KeyboardConfig } from '../Config/ContenConfig'
+import { NavigationActions, NavigationEvents } from 'react-navigation';
 import PaymentActions from '../Redux/PaymentRedux';
 import { getFiatSymbol } from '../utils/helper'
 // Styles
@@ -27,10 +28,15 @@ class ReceiptScreen extends Component {
   }
 
   componentDidMount = () => {
-    this._updateText();
+    this._updateTitle();
   }
 
-  _updateText = () => {
+  _onWillFocus = () => {
+    this.props.updateInput({ input: '' });
+    this.props.updatePayment({ payment: undefined });
+  }
+
+  _updateTitle = () => {
     this.props.navigation.setParams({
       tabBarLabel: I18n.t('ReceiptTab')
     });
@@ -43,6 +49,7 @@ class ReceiptScreen extends Component {
   _onPressPayment = (payment) => {
     const { key } = payment
     this.props.updatePayment({ payment: key });
+    this.props.navigate('OrderScreen');
   }
 
 
@@ -94,6 +101,7 @@ class ReceiptScreen extends Component {
     const { input, fiat } = this.props;
     return (
       <View style={styles.mainContainer}>
+        <NavigationEvents onWillFocus={()=> this._onWillFocus()}/>
         <View style={[styles.container, styles.topSection]}>
           <View style={styles.input}>
             <Text style={styles.symbol}>{getFiatSymbol(fiat)}</Text>
@@ -119,6 +127,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  navigate: (route, params) => dispatch(NavigationActions.navigate({routeName: route, params})),
   updatePayment: (params) => dispatch(PaymentActions.update(params)),
   updateInput: (params) => dispatch(PaymentActions.updateInput(params)),
 })

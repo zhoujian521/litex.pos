@@ -3,10 +3,11 @@ const colors = {
   primary:'#317CDC',
   secondary:'',
   tertiary:'',
-  line: '#F7F7F7',
+  line: '#666666',
   text001: '#333333',
   text002: '#666666',
-  text003: '#999999s',
+  text003: '#999999',
+  golden: '#F8D859',
 
 
   clear: 'rgba(0,0,0,0)',

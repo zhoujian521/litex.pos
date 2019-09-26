@@ -16,10 +16,22 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   fiat: 'CNY',
-  payment: null,
-  input: ''
+  payment: undefined,
+  input: '',
+  order: {
+    orderId: '2019092516533784284',
+    fiat: {
+      symbol: 'USD',
+      amount: '1.2'
+    },
+    token: {
+      symbol: 'USDT',
+      amount: '1200000',
+      decimal: 6,
+      round: 2
+    }
+  }
 })
-
 /* ------------- Selectors ------------- */
 
 export const GithubSelectors = {
@@ -34,7 +46,11 @@ export const update = (state, { data }) => {
   return state.merge({ ...data })
 }
 
-export const updateInput = (state, { data: { input: { key, label } } }) => {
+export const updateInput = (state, { data: { input: item } }) => {
+  if (!item) {
+    return state.merge({ input: '' })
+  }
+  const { key, label } = item
   let { input } = state
   if (key !== KeyboardConfig.delete.key && input.length < 12) {
     input += label

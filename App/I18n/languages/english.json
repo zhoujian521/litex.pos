@@ -28,5 +28,11 @@
   "RecordTab": "Transactions",
 
   "ReceiptTitle": "Payment",
-  "RecordTitle": "Transactions"
+  "RecordTitle": "Transactions",
+  "OrderTitle": "Payment",
+
+  "QRCodeTitle": "Payment amount:",
+  "QRCodeSubTitle": "Legal Tender:",
+
+  "RecommendPayment": "Please use LITEX pay scan to complete the payment"
 }
