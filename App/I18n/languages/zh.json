@@ -4,7 +4,7 @@
 
   "ReceiptTitle": "收款",
   "RecordTitle": "账单",
-  "OrderTitle": "收款",
+  "OrderTitle": "二维码收款",
 
   "QRCodeTitle": "收款金额:",
   "QRCodeSubTitle": "法币金额:",

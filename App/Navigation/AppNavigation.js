@@ -1,4 +1,5 @@
 import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
+import { Platform } from 'react-native'
 import InfoScreen from '../Containers/InfoScreen'
 import UpdateScreen from '../Containers/UpdateScreen'
 import LanguageScreen from '../Containers/LanguageScreen'
@@ -8,12 +9,73 @@ import ReceiptScreen from '../Containers/ReceiptScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import LaunchScreen from '../Containers/LaunchScreen'
 
+import React, { Component } from 'react'
+import { Text, View, TouchableOpacity } from 'react-native'
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Simple from 'react-native-vector-icons/SimpleLineIcons';
+import I18n from '../I18n'
 import styles from './Styles/NavigationStyles'
-import Colors from '../Themes/Colors'
+import { Metrics, Colors, Fonts } from '../Themes';
 
-const BottomTabNav = createBottomTabNavigator({
-  Receipt: { screen: ReceiptScreen },
-  Record: { screen: RecordScreen }
+
+// Manifest of possible screens
+const ReceiptStack = createStackNavigator({
+  ReceiptScreen: { screen: ReceiptScreen },
+  OrderScreen: { screen: OrderScreen },
+}, {
+  // Default config for all screens
+  headerMode: Platform.OS === 'ios' ? 'screen' : 'card',
+  initialRouteName: 'ReceiptScreen',
+  defaultNavigationOptions: {
+    headerStyle: styles.header,
+    headerTintColor: Colors.background,
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }
+})
+
+const RecordStack = createStackNavigator({
+  RecordScreen: { screen: RecordScreen },
+  InfoScreen: { screen: InfoScreen },
+  UpdateScreen: { screen: UpdateScreen },
+  LanguageScreen: { screen: LanguageScreen },
+}, {
+  // Default config for all screens
+  headerMode: Platform.OS === 'ios' ? 'screen' : 'card',
+  initialRouteName: 'RecordScreen',
+  defaultNavigationOptions: {
+    headerStyle: styles.header,
+    headerTintColor: Colors.background,
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }
+})
+
+const TabNavigator = createBottomTabNavigator({
+  Receipt: {
+    screen: ReceiptStack, navigationOptions: {
+      tabBarLabel: I18n.t('ReceiptTab'),
+      tabBarIcon: ({ tintColor }) => (
+        <AntDesign name={'qrcode'}
+          size={Metrics.tabIconSize}
+          color={tintColor}
+        />
+      )
+    }
+  },
+  Record: {
+    screen: RecordStack, navigationOptions: {
+      tabBarLabel: I18n.t('RecordTab'),
+      tabBarIcon: ({ tintColor }) => (
+        <Simple name={'notebook'}
+          size={Metrics.tabIconSize}
+          color={tintColor}
+        />
+      )
+    }
+  }
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: false,
@@ -25,22 +87,17 @@ const BottomTabNav = createBottomTabNavigator({
     style: {
       backgroundColor: Colors.background
     }
-  }
-
+  },
 });
 
+// Manifest of possible screens
+const AuthStack = createStackNavigator({
+  LoginScreen: { screen: LoginScreen }
+})
 
 // Manifest of possible screens
 const AppStack = createStackNavigator({
-  BottomTab: { screen: BottomTabNav },
-  InfoScreen: { screen: InfoScreen },
-  UpdateScreen: { screen: UpdateScreen },
-  LanguageScreen: { screen: LanguageScreen },
-  RecordScreen: { screen: RecordScreen },
-  OrderScreen: { screen: OrderScreen },
-  ReceiptScreen: { screen: ReceiptScreen },
-  LoginScreen: { screen: LoginScreen },
-  LaunchScreen: { screen: LaunchScreen }
+  BottomTab: { screen: TabNavigator }
 }, {
   // Default config for all screens
   headerMode: 'float',
@@ -57,30 +114,16 @@ const AppStack = createStackNavigator({
   }
 })
 
-// Manifest of possible screens
-const AuthStack = createStackNavigator({
-  LoginScreen: { screen: LoginScreen },
-}, {
-  // Default config for all screens
-  headerMode: 'float',
-  initialRouteName: 'LoginScreen',
-  navigationOptions: {
-    header: null
-  },
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: Colors.background
-    }
-  }
-})
 
 const switchNavigator = createSwitchNavigator(
   {
     Auth: AuthStack,
-    App: AppStack,
-  }, {
-  initialRouteName: 'Auth',
-}
+    App: Platform.OS === 'ios' ? TabNavigator : AppStack,
+  },
+  {
+    initialRouteName: 'Auth',
+  }
 );
 
 export default createAppContainer(switchNavigator)
+

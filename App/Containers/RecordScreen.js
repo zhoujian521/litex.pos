@@ -17,25 +17,11 @@ import styles from './Styles/RecordScreenStyle'
 class RecordScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: I18n.t('RecordTitle'),
-      tabBarLabel: navigation.getParam('tabBarLabel'),
-      tabBarIcon: ({ tintColor }) => (
-        <Simple name={'notebook'}
-          size={Metrics.tabIconSize}
-          color={tintColor}
-        />
-      )
+      title: I18n.t('RecordTitle')
     }
   }
 
   componentDidMount = () => {
-    this._updateText();
-  }
-
-  _updateText = () => {
-    this.props.navigation.setParams({
-      tabBarLabel: I18n.t('RecordTab')
-    });
   }
 
   _onChangeTab = (params) => {
@@ -49,25 +35,14 @@ class RecordScreen extends Component {
       style={{ marginTop: Metrics.smallMargin }}
       initialPage={0}
       renderTabBar={() => <DefaultTabBar />}
+      // onChangeTab={this._onChangeTab}
+      tabBarUnderlineStyle={styles.tabBarUnderline}
+      tabBarInactiveTextColor={Colors.text002}
+      tabBarActiveTextColor={Colors.primary}
     >
       <Orders tabLabel={I18n.t('Orders')} />
       <Assets tabLabel={I18n.t('Assets')} />
     </ScrollableTabView>;
-
-    // return (
-    //   <View style={styles.mainContainer}>
-    //     <ScrollableTabView
-    //       initialPage={0}
-    //       style={styles.tabBarStyle}
-    //       tabBarActiveTextColor={Colors.primary}
-    //       tabBarInactiveTextColor={Colors.text003}
-    //       tabBarUnderlineStyle={styles.tabBarUnderline}
-    //       renderTabBar={() => <DefaultTabBar />}
-    //       onChangeTab={(params) => this._onChangeTab(params)}
-    //     >
-    //     </ScrollableTabView>
-    //   </View>
-    // )
   }
 }
 

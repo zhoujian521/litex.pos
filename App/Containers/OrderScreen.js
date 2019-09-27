@@ -10,19 +10,11 @@ import { Metrics, Images } from '../Themes';
 class OrderScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('title'),
-      backgroundColor: 'red'
+      title: I18n.t('OrderTitle'),
     }
   }
 
   componentDidMount = () => {
-    this._updateTitle();
-  }
-
-  _updateTitle = () => {
-    this.props.navigation.setParams({
-      title: I18n.t('OrderTitle')
-    });
   }
 
   render() {

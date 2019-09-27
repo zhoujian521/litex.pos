@@ -16,7 +16,17 @@ import styles from './Styles/ReceiptScreenStyle'
 
 class ReceiptScreen extends Component {
   static navigationOptions = ({ navigation }) => {
+    console.log('======navigation==============================');
     return {
+      title: navigation.getParam('tabBarLabel'),
+    }
+  }
+  static tabBarOptions = (params) => {
+    console.log('=============navigation=======================');
+    console.log(params);
+    console.log('=============navigation=======================');
+    return {
+      title: navigation.getParam('tabBarLabel'),
       tabBarLabel: navigation.getParam('tabBarLabel'),
       tabBarIcon: ({ tintColor }) => (
         <AntDesign name={'qrcode'}
@@ -101,7 +111,7 @@ class ReceiptScreen extends Component {
     const { input, fiat } = this.props;
     return (
       <View style={styles.mainContainer}>
-        <NavigationEvents onWillFocus={()=> this._onWillFocus()}/>
+        <NavigationEvents onWillFocus={() => this._onWillFocus()} />
         <View style={[styles.container, styles.topSection]}>
           <View style={styles.input}>
             <Text style={styles.symbol}>{getFiatSymbol(fiat)}</Text>
@@ -127,7 +137,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  navigate: (route, params) => dispatch(NavigationActions.navigate({routeName: route, params})),
+  navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
   updatePayment: (params) => dispatch(PaymentActions.update(params)),
   updateInput: (params) => dispatch(PaymentActions.updateInput(params)),
 })
