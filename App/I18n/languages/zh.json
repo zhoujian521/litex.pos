@@ -5,6 +5,7 @@
   "ReceiptTitle": "收款",
   "RecordTitle": "账单",
   "OrderTitle": "二维码收款",
+  "LanguageTitle": "语言设置",
 
   "QRCodeTitle": "收款金额:",
   "QRCodeSubTitle": "法币金额:",
@@ -22,6 +23,7 @@
   "MenuCurrency": "币种设置",
   "MenuUpdate": "检查更新",
   "MenuAbout": "关于",
-  "MenuLogout": "登出"
+  "MenuLogout": "登出",
+  "saveBtn": "保存"
 
 }

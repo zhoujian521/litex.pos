@@ -30,6 +30,7 @@
   "ReceiptTitle": "Payment",
   "RecordTitle": "Transactions",
   "OrderTitle": "Payment",
+  "LanguageTitle": "Language",
 
   "QRCodeTitle": "Payment amount:",
   "QRCodeSubTitle": "Legal Tender:",
@@ -47,5 +48,6 @@
   "MenuCurrency": "Currency",
   "MenuUpdate": "Update",
   "MenuAbout": "About",
-  "MenuLogout": "Logout"
+  "MenuLogout": "Logout",
+  "saveBtn": "Save"
 }

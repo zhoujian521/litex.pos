@@ -30,9 +30,9 @@ export const GithubSelectors = {
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
-  console.log('============update=====payment===================');
+  console.log('============update=====loading===================');
   console.log(state.merge({ ...data }));
-  console.log('============update=====payment===================');
+  console.log('============update=====loading===================');
   return state.merge({ ...data })
 }
 
