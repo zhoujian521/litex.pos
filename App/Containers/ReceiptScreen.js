@@ -10,15 +10,16 @@ import { PaymentConfig, KeyboardConfig } from '../Config/ContenConfig'
 import { NavigationActions, NavigationEvents } from 'react-navigation';
 import PaymentActions from '../Redux/PaymentRedux';
 import { getFiatSymbol } from '../utils/helper'
+import RightItem from '../Components/RightItem';
 // Styles
 import styles from './Styles/ReceiptScreenStyle'
 
 
 class ReceiptScreen extends Component {
   static navigationOptions = ({ navigation }) => {
-    console.log('======navigation==============================');
     return {
-      title: navigation.getParam('tabBarLabel'),
+      title: I18n.t('ReceiptTab'),
+      headerRight: (<RightItem />)
     }
   }
   static tabBarOptions = (params) => {
@@ -38,18 +39,11 @@ class ReceiptScreen extends Component {
   }
 
   componentDidMount = () => {
-    this._updateTitle();
   }
 
   _onWillFocus = () => {
     this.props.updateInput({ input: '' });
     this.props.updatePayment({ payment: undefined });
-  }
-
-  _updateTitle = () => {
-    this.props.navigation.setParams({
-      tabBarLabel: I18n.t('ReceiptTab')
-    });
   }
 
   _onPressKey = (input) => {

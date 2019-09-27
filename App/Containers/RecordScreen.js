@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, View } from 'react-native'
 import { connect } from 'react-redux'
-import Simple from 'react-native-vector-icons/SimpleLineIcons';
 import { Metrics, Colors } from '../Themes';
 import I18n from '../I18n'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import Orders from '../Components/Orders';
 import Assets from '../Components/Assets';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
+import RightItem from '../Components/RightItem';
 
 
 // Styles
@@ -17,7 +14,8 @@ import styles from './Styles/RecordScreenStyle'
 class RecordScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: I18n.t('RecordTitle')
+      title: I18n.t('RecordTitle'),
+      headerRight: (<RightItem />)
     }
   }
 

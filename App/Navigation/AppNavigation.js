@@ -1,12 +1,14 @@
 import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
 import { Platform } from 'react-native'
 import InfoScreen from '../Containers/InfoScreen'
-import UpdateScreen from '../Containers/UpdateScreen'
 import LanguageScreen from '../Containers/LanguageScreen'
 import RecordScreen from '../Containers/RecordScreen'
 import OrderScreen from '../Containers/OrderScreen'
 import ReceiptScreen from '../Containers/ReceiptScreen'
 import LoginScreen from '../Containers/LoginScreen'
+import CurrencyScreen from '../Containers/CurrencyScreen'
+
+import UpdateScreen from '../Containers/UpdateScreen'
 import LaunchScreen from '../Containers/LaunchScreen'
 
 import React, { Component } from 'react'
@@ -22,6 +24,11 @@ import { Metrics, Colors, Fonts } from '../Themes';
 const ReceiptStack = createStackNavigator({
   ReceiptScreen: { screen: ReceiptScreen },
   OrderScreen: { screen: OrderScreen },
+
+  InfoScreen: { screen: InfoScreen },
+  UpdateScreen: { screen: UpdateScreen },
+  LanguageScreen: { screen: LanguageScreen },
+  CurrencyScreen: { screen: CurrencyScreen },
 }, {
   // Default config for all screens
   headerMode: Platform.OS === 'ios' ? 'screen' : 'card',
@@ -38,8 +45,10 @@ const ReceiptStack = createStackNavigator({
 const RecordStack = createStackNavigator({
   RecordScreen: { screen: RecordScreen },
   InfoScreen: { screen: InfoScreen },
+
   UpdateScreen: { screen: UpdateScreen },
   LanguageScreen: { screen: LanguageScreen },
+  CurrencyScreen: { screen: CurrencyScreen },
 }, {
   // Default config for all screens
   headerMode: Platform.OS === 'ios' ? 'screen' : 'card',
@@ -121,7 +130,7 @@ const switchNavigator = createSwitchNavigator(
     App: Platform.OS === 'ios' ? TabNavigator : AppStack,
   },
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'App',
   }
 );
 

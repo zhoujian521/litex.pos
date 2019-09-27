@@ -41,5 +41,11 @@
 
   "CompanyPrompt": "Technical services: Beijing boya kono information technology co., LTD",
 
-  "LoginTitle": "Login"
+  "LoginTitle": "Login",
+
+  "MenuLanguage": "Language",
+  "MenuCurrency": "Currency",
+  "MenuUpdate": "Update",
+  "MenuAbout": "About",
+  "MenuLogout": "Logout"
 }

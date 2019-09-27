@@ -16,5 +16,12 @@
 
   "CompanyPrompt": "技术服务: 北京博雅科诺信息技术有限公司",
 
-  "LoginTitle": "立即登录"
+  "LoginTitle": "立即登录",
+
+  "MenuLanguage": "语言设置",
+  "MenuCurrency": "币种设置",
+  "MenuUpdate": "检查更新",
+  "MenuAbout": "关于",
+  "MenuLogout": "登出"
+
 }

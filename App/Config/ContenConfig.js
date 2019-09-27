@@ -1,4 +1,5 @@
 import Colors from '../Themes/Colors'
+import I18n from '../I18n'
 
 export const PaymentConfig = {
   qrcode: {
@@ -80,5 +81,38 @@ export const LoginConfig = {
     icon: 'unlock',
     placeholder: '请输入密码',
     returnKey: "done"
+  }
+};
+
+export const MenuConfig = {
+  language: {
+    key: 'language',
+    icon: 'user',
+    title: I18n.t('MenuLanguage'),
+    screen: 'LanguageScreen'
+  },
+  currency: {
+    key: 'currency',
+    icon: 'user',
+    title: I18n.t('MenuCurrency'),
+    screen: 'CurrencyScreen'
+  },
+  update: {
+    key: 'update',
+    icon: 'user',
+    title: I18n.t('MenuUpdate'),
+    screen: 'UpdateScreen'
+  },
+  about: {
+    key: 'about',
+    icon: 'user',
+    title: I18n.t('MenuAbout'),
+    screen: 'InfoScreen'
+  },
+  logout: {
+    key: 'logout',
+    icon: 'user',
+    title: I18n.t('MenuLogout'),
+    screen: undefined
   }
 };
