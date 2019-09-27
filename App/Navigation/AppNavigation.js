@@ -33,7 +33,7 @@ const ReceiptStack = createStackNavigator({
   // Default config for all screens
   mode: "card",
   headerMode: Platform.OS === 'ios' ? 'float' : 'screen',
-  initialRouteName: 'ReceiptScreen',
+  initialRouteName: 'OrderScreen',
   defaultNavigationOptions: {
     headerStyle: styles.header,
     headerTintColor: Colors.background,

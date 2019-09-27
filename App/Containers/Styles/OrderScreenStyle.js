@@ -6,31 +6,31 @@ import { Metrics, Fonts } from '../../Themes';
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    justifyContent: 'center',
-    alignItems: 'center'
+    flex: 1,
   },
   topSection: {
-    paddingTop: Metrics.baseMargin,
-    paddingBottom: Metrics.section,
-    borderWidth: Metrics.horizontalLineHeight / PixelRatio.get(),
+    flex: 3,
+    margin: Metrics.doubleSection,
+    marginBottom: 0,
+    borderWidth: 1 / PixelRatio.get(),
     borderColor: Colors.line,
     borderRadius: Metrics.buttonRadius * 2,
-    alignItems: 'center'
   },
   bottomSection: {
-    padding: Metrics.baseMargin,
+    flex: 1,
+    alignItems: "center"
   },
   amountSection: {
-    paddingHorizontal: Metrics.section,
-    paddingBottom: Metrics.baseMargin,
-    borderBottomWidth: Metrics.horizontalLineHeight / PixelRatio.get(),
+    alignItems: "center",
+    paddingVertical: Metrics.baseMargin,
+    borderBottomWidth: 1 / PixelRatio.get(),
     borderBottomColor: Colors.line,
     borderStyle:'solid', // 'solid' | 'dotted' | 'dashed',
   },
   qrCodeSection: {
-    paddingTop: Metrics.section,
-    alignItems: 'center',
-    paddingHorizontal: Metrics.section,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   fiatSection: {
     flexDirection: "row",

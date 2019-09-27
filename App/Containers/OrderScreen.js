@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import I18n from '../I18n'
 import QRCode from 'react-native-qrcode-svg';
@@ -9,7 +9,7 @@ import { Metrics, Images } from '../Themes';
 import CommonHeader from '../Components/CommonHeader';
 
 class OrderScreen extends Component {
-  
+
   static navigationOptions = ({ navigation }) => {
     return {
       header: () => <CommonHeader
@@ -44,21 +44,21 @@ class OrderScreen extends Component {
       token: { symbol: tokenSymbol, amount: tokenAmount }
     } = order
     return (
-      <View style={[styles.mainContainer, styles.container]} >
-        <View style={[styles.topSection]}>
+      <View style={styles.container} >
+        {(Platform.OS === 'ios') ? <View style={{ flex: 0.3 }} /> : null}
+        <View style={styles.topSection}>
           <View style={styles.amountSection}>
             <View style={styles.fiatSection}>
               <Text style={styles.leftTitle}>{I18n.t('QRCodeTitle')}</Text>
               <Text style={styles.rightAmount}>{fiatAmount}</Text>
               <Text style={styles.rightAmount}>{fiatSymbol}</Text>
             </View>
-            <View style={[styles.tokenSection, {marginTop: Metrics.smallMargin}]}>
+            <View style={[styles.tokenSection, { marginTop: Metrics.smallMargin }]}>
               <Text style={styles.leftTitle}>{I18n.t('QRCodeSubTitle')}</Text>
               <Text style={styles.rightAmount}>{tokenAmount}</Text>
               <Text style={styles.rightAmount}>{tokenSymbol}</Text>
             </View>
           </View>
-
           <View style={styles.qrCodeSection}>
             <QRCode value={orderId} size={Metrics.screenWidth * 0.45} />
             <Text style={styles.orderId}>{orderId}</Text>
@@ -66,7 +66,7 @@ class OrderScreen extends Component {
         </View>
         <View style={styles.bottomSection}>
           <View style={styles.imageSection}>
-            <Image source={Images.LITEXPay} style={styles.image}/>
+            <Image source={Images.LITEXPay} style={styles.image} />
           </View>
           <Text>{I18n.t('RecommendPayment')}</Text>
         </View>
