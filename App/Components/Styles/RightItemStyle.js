@@ -6,7 +6,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingRight: Metrics.doubleBaseMargin,
+    paddingLeft: Metrics.doubleBaseMargin,
   },
   itemContainer: {
     flex: 1,

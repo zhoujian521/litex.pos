@@ -31,7 +31,8 @@ const ReceiptStack = createStackNavigator({
   CurrencyScreen: { screen: CurrencyScreen },
 }, {
   // Default config for all screens
-  headerMode: Platform.OS === 'ios' ? 'screen' : 'card',
+  mode: "card",
+  headerMode: Platform.OS === 'ios' ? 'float' : 'screen',
   initialRouteName: 'ReceiptScreen',
   defaultNavigationOptions: {
     headerStyle: styles.header,
@@ -44,15 +45,10 @@ const ReceiptStack = createStackNavigator({
 
 const RecordStack = createStackNavigator({
   RecordScreen: { screen: RecordScreen },
-  InfoScreen: { screen: InfoScreen },
-
-  UpdateScreen: { screen: UpdateScreen },
-  LanguageScreen: { screen: LanguageScreen },
-  CurrencyScreen: { screen: CurrencyScreen },
 }, {
   // Default config for all screens
-  headerMode: Platform.OS === 'ios' ? 'screen' : 'card',
-  initialRouteName: 'RecordScreen',
+  mode: "card",
+  headerMode: Platform.OS === 'ios' ? 'float' : 'screen',
   defaultNavigationOptions: {
     headerStyle: styles.header,
     headerTintColor: Colors.background,
@@ -104,30 +100,10 @@ const AuthStack = createStackNavigator({
   LoginScreen: { screen: LoginScreen }
 })
 
-// Manifest of possible screens
-const AppStack = createStackNavigator({
-  BottomTab: { screen: TabNavigator }
-}, {
-  // Default config for all screens
-  headerMode: 'float',
-  cardStyle: {
-    shadowColor: 'BottomTab'
-  },
-  initialRouteName: 'BottomTab',
-  defaultNavigationOptions: {
-    headerStyle: styles.header,
-    headerTintColor: Colors.text001,
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }
-})
-
-
 const switchNavigator = createSwitchNavigator(
   {
     Auth: AuthStack,
-    App: Platform.OS === 'ios' ? TabNavigator : AppStack,
+    App: TabNavigator,
   },
   {
     initialRouteName: 'App',

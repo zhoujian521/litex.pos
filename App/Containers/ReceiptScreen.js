@@ -11,30 +11,20 @@ import { NavigationActions, NavigationEvents } from 'react-navigation';
 import PaymentActions from '../Redux/PaymentRedux';
 import { getFiatSymbol } from '../utils/helper'
 import RightItem from '../Components/RightItem';
+import CommonHeader from '../Components/CommonHeader';
 // Styles
 import styles from './Styles/ReceiptScreenStyle'
 
 
 class ReceiptScreen extends Component {
+
   static navigationOptions = ({ navigation }) => {
     return {
-      title: I18n.t('ReceiptTab'),
-      headerRight: (<RightItem />)
-    }
-  }
-  static tabBarOptions = (params) => {
-    console.log('=============navigation=======================');
-    console.log(params);
-    console.log('=============navigation=======================');
-    return {
-      title: navigation.getParam('tabBarLabel'),
-      tabBarLabel: navigation.getParam('tabBarLabel'),
-      tabBarIcon: ({ tintColor }) => (
-        <AntDesign name={'qrcode'}
-          size={Metrics.tabIconSize}
-          color={tintColor}
-        />
-      )
+      header: () => <CommonHeader
+        headerRight={<RightItem />}
+        isShowLeft={false}
+        title={I18n.t('ReceiptTab')}
+      />
     }
   }
 

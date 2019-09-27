@@ -1,4 +1,5 @@
-import {Dimensions, Platform} from 'react-native'
+import { Dimensions, Platform } from 'react-native'
+import { isIPhoneXL, isBeforeAndroid21 } from '../utils/utils'
 
 const { width, height } = Dimensions.get('window')
 
@@ -14,7 +15,9 @@ const metrics = {
   horizontalLineHeight: 1,
   screenWidth: width < height ? width : height,
   screenHeight: width < height ? height : width,
-  navBarHeight: (Platform.OS === 'ios') ? 64 : 54,
+  navBarHeight: (Platform.OS === 'ios') ? (isIPhoneXL() ? 88 : 64) : 54,
+  statusBarHeight: isIPhoneXL() ? 44 : 0, //(isBeforeAndroid21 ? 0 : 20)
+  tabBarHeight: isIPhoneXL() ? 83 : 49,
   buttonRadius: 4,
   icons: {
     tiny: 15,

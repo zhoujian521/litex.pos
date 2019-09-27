@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text } from 'react-native'
-import PropTypes from 'prop-types';
 import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './Styles/RightItemStyle'
 import { Metrics, Colors } from '../Themes';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { MenuConfig } from '../Config/ContenConfig'
-import { NavigationActions, NavigationEvents } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 
 class RightItem extends Component {
 
@@ -43,6 +42,7 @@ class RightItem extends Component {
           onSelect={this._onSelect}
           renderRow={this._renderRow}
           adjustFrame={this._adjustFrame}
+          showsVerticalScrollIndicator={false}
         >
           <Entypo name={'menu'}
             size={Metrics.images.small + 10}

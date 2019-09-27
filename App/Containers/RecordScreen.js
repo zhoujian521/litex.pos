@@ -5,8 +5,7 @@ import I18n from '../I18n'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import Orders from '../Components/Orders';
 import Assets from '../Components/Assets';
-import RightItem from '../Components/RightItem';
-
+import CommonHeader from '../Components/CommonHeader';
 
 // Styles
 import styles from './Styles/RecordScreenStyle'
@@ -14,8 +13,10 @@ import styles from './Styles/RecordScreenStyle'
 class RecordScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: I18n.t('RecordTitle'),
-      headerRight: (<RightItem />)
+      header: () => <CommonHeader
+        isShowLeft={false}
+        title={I18n.t('RecordTitle')}
+      />
     }
   }
 
