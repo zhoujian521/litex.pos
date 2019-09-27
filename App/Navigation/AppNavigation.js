@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation'
+import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
 import InfoScreen from '../Containers/InfoScreen'
 import UpdateScreen from '../Containers/UpdateScreen'
 import LanguageScreen from '../Containers/LanguageScreen'
@@ -17,9 +17,6 @@ const BottomTabNav = createBottomTabNavigator({
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: false,
-  // navigationOptions:{
-  //     header:null
-  // },
   tabBarOptions: {
     activeTintColor: Colors.primary,
     inactiveTintColor: Colors.text002,
@@ -34,7 +31,7 @@ const BottomTabNav = createBottomTabNavigator({
 
 
 // Manifest of possible screens
-const PrimaryNav = createStackNavigator({
+const AppStack = createStackNavigator({
   BottomTab: { screen: BottomTabNav },
   InfoScreen: { screen: InfoScreen },
   UpdateScreen: { screen: UpdateScreen },
@@ -60,4 +57,30 @@ const PrimaryNav = createStackNavigator({
   }
 })
 
-export default createAppContainer(PrimaryNav)
+// Manifest of possible screens
+const AuthStack = createStackNavigator({
+  LoginScreen: { screen: LoginScreen },
+}, {
+  // Default config for all screens
+  headerMode: 'float',
+  initialRouteName: 'LoginScreen',
+  navigationOptions: {
+    header: null
+  },
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: Colors.background
+    }
+  }
+})
+
+const switchNavigator = createSwitchNavigator(
+  {
+    Auth: AuthStack,
+    App: AppStack,
+  }, {
+  initialRouteName: 'Auth',
+}
+);
+
+export default createAppContainer(switchNavigator)

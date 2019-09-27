@@ -37,5 +37,9 @@
   "RecommendPayment": "Please use LITEX pay scan to complete the payment",
 
   "Orders": "Orders",
-  "Assets": "Assets"
+  "Assets": "Assets",
+
+  "CompanyPrompt": "Technical services: Beijing boya kono information technology co., LTD",
+
+  "LoginTitle": "Login"
 }

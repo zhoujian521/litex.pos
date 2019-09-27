@@ -12,6 +12,9 @@
   "RecommendPayment": "请使用 LITEX pay 扫一扫完成支付",
 
   "Orders": "订单记录",
-  "Assets": "资金记录"
+  "Assets": "资金记录",
 
+  "CompanyPrompt": "技术服务: 北京博雅科诺信息技术有限公司",
+
+  "LoginTitle": "立即登录"
 }

@@ -19,51 +19,66 @@ export const PaymentConfig = {
 
 export const KeyboardConfig = {
   one: {
-    key:'one',
+    key: 'one',
     label: '1',
   },
   two: {
-    key:'two',
+    key: 'two',
     label: '2',
   },
   three: {
-    key:'three',
+    key: 'three',
     label: '3',
   },
   four: {
-    key:'four',
+    key: 'four',
     label: '4',
   },
   five: {
-    key:'five',
+    key: 'five',
     label: '5',
   },
   six: {
-    key:'six',
+    key: 'six',
     label: '6',
   },
   seven: {
-    key:'seven',
+    key: 'seven',
     label: '7',
   },
   eight: {
-    key:'eight',
+    key: 'eight',
     label: '8',
   },
   nine: {
-    key:'nine',
+    key: 'nine',
     label: '9',
   },
   point: {
-    key:'point',
+    key: 'point',
     label: '.',
   },
   zero: {
-    key:'zero',
+    key: 'zero',
     label: '0',
   },
   delete: {
-    key:'delete',
+    key: 'delete',
     label: 'x',
+  }
+};
+
+export const LoginConfig = {
+  username: {
+    key: 'username',
+    icon: 'user',
+    placeholder: '请输入用户名',
+    returnKey: "next"
+  },
+  password: {
+    key: 'password',
+    icon: 'unlock',
+    placeholder: '请输入密码',
+    returnKey: "done"
   }
 };
