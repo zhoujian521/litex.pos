@@ -7,14 +7,18 @@ import { CurrencyConfig } from '../Config/ContenConfig'
 import ConfigActions from '../Redux/ConfigRedux';
 import { Metrics, Colors } from '../Themes';
 import { StackActions } from 'react-navigation';
+import CommonHeader from '../Components/CommonHeader';
 
 // Styles
 import styles from './Styles/CurrencyScreenStyle'
 
 class CurrencyScreen extends Component {
-  static navigationOptions = () => {
+
+  static navigationOptions = ({ navigation }) => {
     return {
-      title: I18n.t('MenuCurrency')
+      header: () => <CommonHeader
+        title={I18n.t('MenuCurrency')}
+      />
     }
   }
 

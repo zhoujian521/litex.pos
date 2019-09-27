@@ -6,7 +6,7 @@ import { Metrics, Images, Fonts, Colors } from '../Themes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { LoginConfig } from '../Config/ContenConfig'
 import { NavigationActions } from 'react-navigation';
-
+import CommonHeader from '../Components/CommonHeader';
 // Styles
 import styles from './Styles/LoginScreenStyle'
 

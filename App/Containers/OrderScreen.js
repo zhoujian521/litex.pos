@@ -6,11 +6,15 @@ import QRCode from 'react-native-qrcode-svg';
 // Styles
 import styles from './Styles/OrderScreenStyle'
 import { Metrics, Images } from '../Themes';
+import CommonHeader from '../Components/CommonHeader';
 
 class OrderScreen extends Component {
+  
   static navigationOptions = ({ navigation }) => {
     return {
-      title: I18n.t('OrderTitle'),
+      header: () => <CommonHeader
+        title={I18n.t('OrderTitle')}
+      />
     }
   }
 

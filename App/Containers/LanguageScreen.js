@@ -7,14 +7,18 @@ import Feather from 'react-native-vector-icons/Feather';
 import { LanguageConfig } from '../Config/ContenConfig'
 import ConfigActions from '../Redux/ConfigRedux';
 import { Metrics, Colors } from '../Themes';
+import CommonHeader from '../Components/CommonHeader';
 
 // Styles
 import styles from './Styles/LanguageScreenStyle'
 
 class LanguageScreen extends Component {
-  static navigationOptions = () => {
+
+  static navigationOptions = ({ navigation }) => {
     return {
-      title: I18n.t('MenuLanguage')
+      header: () => <CommonHeader
+        title={I18n.t('MenuLanguage')}
+      />
     }
   }
 
