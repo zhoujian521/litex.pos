@@ -130,3 +130,42 @@ export const LanguageConfig = {
     locale: 'en'
   }
 };
+
+export const CurrencyConfig = {
+  CNY: {
+    key: 'CNY',
+    title: '人民币(CNY)',
+    currency: 'CNY',
+    symbol: '￥'
+  },
+  HKD: {
+    key: 'HKD',
+    title: '港币(HKD)',
+    currency: 'HKD',
+    symbol: '$'
+  },
+  USD: {
+    key: 'USD',
+    title: '美元(USD)',
+    currency: 'USD',
+    symbol: '$'
+  },
+  JPY: {
+    key: 'JPY',
+    title: '日元(JPY)',
+    currency: 'JPY',
+    symbol: '$'
+  },
+  KRW: {
+    key: 'KRW',
+    title: '韩币(KRW)',
+    currency: 'KRW',
+    symbol: '$'
+  },
+  SGD: {
+    key: 'SGD',
+    title: '新加坡币(SGD)',
+    currency: 'SGD',
+    symbol: '$'
+  }
+};

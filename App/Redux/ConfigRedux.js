@@ -16,6 +16,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   locale: 'zh',
+  currency: 'CNY'
 })
 /* ------------- Selectors ------------- */
 
@@ -25,10 +26,10 @@ export const GithubSelectors = {
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
-  console.log('============update=====locale===================');
+  console.log('============update=====config===================');
   console.log(data);
   console.log(state.merge({ ...data }));
-  console.log('============update=====locale===================');
+  console.log('============update=====config===================');
   return state.merge({ ...data })
 }
 

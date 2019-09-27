@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import I18n from '../I18n';
+import { StackActions } from 'react-navigation';
 import Feather from 'react-native-vector-icons/Feather';
 import { LanguageConfig } from '../Config/ContenConfig'
 import ConfigActions from '../Redux/ConfigRedux';
@@ -13,7 +14,7 @@ import styles from './Styles/LanguageScreenStyle'
 class LanguageScreen extends Component {
   static navigationOptions = () => {
     return {
-      title: I18n.t('LanguageTitle')
+      title: I18n.t('MenuLanguage')
     }
   }
 
@@ -28,6 +29,7 @@ class LanguageScreen extends Component {
   _onPressSave = () => {
     const { locale } = this.state;
     this.props.updateLocale({ locale })
+    this.props.pop()
   }
 
   _onPressItem = (item) => {
@@ -80,6 +82,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  pop: () => dispatch(StackActions.pop()),
   updateLocale: (params) => dispatch(ConfigActions.update(params)),
 })
 
