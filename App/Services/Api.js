@@ -1,8 +1,12 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
+import Config from 'react-native-config';
 
 // our "constructor"
-const create = (baseURL = 'https://api.github.com/') => {
+const create = (baseURL = Config.API_URL) => {
+  console.log('===============Config====================');
+  console.log(baseURL);
+  console.log('===============Config=====================');
   // ------
   // STEP 1
   // ------
@@ -19,6 +23,18 @@ const create = (baseURL = 'https://api.github.com/') => {
     // 10 second timeout...
     timeout: 10000
   })
+  api.addRequestTransform((request) => {
+    // console.log('==========request==========================');
+    // console.log(request);
+    // console.log('===========request=========================');
+  });
+
+  api.addResponseTransform(response => {
+    // console.log('==========response==========================');
+    // console.log(response);
+    // console.log('===========response=========================');
+    // return response;
+  });
 
   // ------
   // STEP 2
@@ -36,7 +52,9 @@ const create = (baseURL = 'https://api.github.com/') => {
   //
   const getRoot = () => api.get('')
   const getRate = () => api.get('rate_limit')
-  const getUser = (username) => api.get('search/users', {q: username})
+  const getUser = (username) => api.get('search/users', { q: username })
+
+  const getConfig = () => api.get('/api/v1/config');
 
   // ------
   // STEP 3
@@ -54,7 +72,9 @@ const create = (baseURL = 'https://api.github.com/') => {
     // a list of the API functions from step 2
     getRoot,
     getRate,
-    getUser
+    getUser,
+
+    getConfig
   }
 }
 
