@@ -3,7 +3,6 @@ import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import I18n from '../I18n';
 import Feather from 'react-native-vector-icons/Feather';
-import { CurrencyConfig } from '../Config/ContenConfig'
 import ConfigActions from '../Redux/ConfigRedux';
 import { Metrics, Colors } from '../Themes';
 import { StackActions } from 'react-navigation';
@@ -24,31 +23,31 @@ class CurrencyScreen extends Component {
 
   constructor(props) {
     super(props);
-    const { currency } = this.props
+    const { fiatType } = this.props
     this.state = {
-      currency
+      fiatType
     };
   }
 
   _onPressSave = () => {
-    const { currency } = this.state;
-    this.props.updateLocale({ currency });
+    const { fiatType } = this.state;
+    this.props.updateCurrency({ fiatType });
     this.props.pop()
   }
 
   _onPressItem = (item) => {
-    const { currency } = item;
-    this.setState({ currency });
+    const { fiatType } = item;
+    this.setState({ fiatType });
   }
 
   _renderItem = ({ item }) => {
-    const { currency } = this.state
-    const { title = '', currency: itemCurrency } = item;
+    const { fiatType: type } = this.state
+    const { title = '', fiatType } = item;
 
     return (<TouchableOpacity onPress={() => this._onPressItem(item)}>
       <View style={styles.itemContainer}>
         <Text style={styles.itemTitle}>{title}</Text>
-        {itemCurrency === currency ? <View>
+        {fiatType === type ? <View>
           <Feather name={'check'}
             size={Metrics.icons.small}
             color={Colors.primary}
@@ -59,11 +58,12 @@ class CurrencyScreen extends Component {
   }
 
   render() {
-    const data = Object.values(CurrencyConfig).map((config) => config)
+    const { fiats = [] } = this.props
     return (
       <View style={styles.container}>
         <FlatList style={styles.container}
-          data={data}
+          data={fiats}
+          extraData={this.state}
           keyExtractor={(item, index) => '' + index}
           renderItem={this._renderItem}
         />
@@ -77,14 +77,14 @@ class CurrencyScreen extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    config: { currency }
+    config: { fiats, fiatType }
   } = state;
-  return { currency };
+  return { fiats, fiatType };
 }
 
 const mapDispatchToProps = (dispatch) => ({
   pop: () => dispatch(StackActions.pop()),
-  updateLocale: (params) => dispatch(ConfigActions.update(params)),
+  updateCurrency: (params) => dispatch(ConfigActions.update(params)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyScreen)

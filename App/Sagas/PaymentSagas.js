@@ -22,9 +22,9 @@ export function* pleaseOrder(api, { data: params }) {
       yield put(PaymentActions.requestFailure())
     }
   } catch (error) {
-    console.log('==========pleaseOrder===error=======================');
+    console.log('==========pleaseOrder===error=========');
     console.log(error);
-    console.log('==========pleaseOrder===error=======================');
+    console.log('==========pleaseOrder===error==========');
   }
 }
 
@@ -37,6 +37,7 @@ export function* socketInit(api, { data }) {
 
 function connect() {
   console.log('============connect========================');
+  socket && socket.emit('lottery', '1')
 }
 
 function reconnect() {

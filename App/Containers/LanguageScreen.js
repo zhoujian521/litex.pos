@@ -43,9 +43,6 @@ class LanguageScreen extends Component {
 
   _renderItem = ({ item }) => {
     const { locale } = this.state
-    console.log('=============locale=======================');
-    console.log(locale);
-    console.log('=============locale=======================');
     const { title = '', locale: itemLocale } = item;
 
     return (<TouchableOpacity onPress={() => this._onPressItem(item)}>

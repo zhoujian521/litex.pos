@@ -18,15 +18,11 @@ class LoginScreen extends Component {
   }
 
   _onSubmitEditing = (key) => {
-    console.log('==========_onSubmitEditing==========================');
     console.log(key);
-    console.log('==========_onSubmitEditing==========================');
   }
 
   _onChangeText = (key, text) => {
-    console.log('==========_onChangeText==========================');
     console.log(key, text);
-    console.log('==========_onChangeText==========================');
   }
 
   _onPressLogin = () => {

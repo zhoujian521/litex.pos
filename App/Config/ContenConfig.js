@@ -133,39 +133,39 @@ export const LanguageConfig = {
 
 export const CurrencyConfig = {
   CNY: {
-    key: 'CNY',
-    title: '人民币(CNY)',
-    currency: 'CNY',
-    symbol: '￥'
-  },
-  HKD: {
-    key: 'HKD',
-    title: '港币(HKD)',
-    currency: 'HKD',
-    symbol: '$'
+    fiatType: 1,
+    symbol: '￥',
+    fiatSymbol: 'CNY',
+    title: '人民币(CNY)'
   },
   USD: {
-    key: 'USD',
-    title: '美元(USD)',
-    currency: 'USD',
-    symbol: '$'
+    fiatType: 2,
+    symbol: '$',
+    fiatSymbol: 'USD',
+    title: '美元(USD)'
+  },
+  HKD: {
+    fiatType: 3,
+    symbol: '$',
+    fiatSymbol: 'HKD',
+    title: '港币(HKD)'
   },
   JPY: {
-    key: 'JPY',
-    title: '日元(JPY)',
-    currency: 'JPY',
-    symbol: '$'
+    fiatType: 4,
+    symbol: '$',
+    fiatSymbol: 'JPY',
+    title: '日元(JPY)'
   },
   KRW: {
-    key: 'KRW',
+    fiatType: 5,
+    symbol: '$',
+    fiatSymbol: 'KRW',
     title: '韩币(KRW)',
-    currency: 'KRW',
-    symbol: '$'
   },
   SGD: {
-    key: 'SGD',
+    fiatType: 6,
+    symbol: '$',
+    fiatSymbol: 'SGD',
     title: '新加坡币(SGD)',
-    currency: 'SGD',
-    symbol: '$'
   }
 };

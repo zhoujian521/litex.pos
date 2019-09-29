@@ -18,47 +18,39 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  locale: 'zh',
-  currency: 'CNY',
-  loading: false
+  loading: false,
+  baseUrl: "",
+  contacts: undefined,
+  fiats: [],
+  fiatType: undefined,
+  locale: undefined
 })
 /* ------------- Selectors ------------- */
 
-export const GithubSelectors = {
-  selectAvatar: state => state.github.avatar
+export const ConfigSelectors = {
+  selectAvatar: state => state.config.avatar
 }
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
-  console.log('============update=====config===================');
-  console.log(data);
-  console.log(state.merge({ ...data }));
-  console.log('============update=====config===================');
   return state.merge({ ...data })
 }
 
 // request the avatar for a user
 export const request = (state, params) => {
-  console.log('============request========================');
-  console.log(params);
-  console.log('============request========================');
   return state.merge({ loading: true })
 }
 
 // successful avatar lookup
 export const success = (state, { data }) => {
-  console.log('============success========================');
+  console.log('======config======success===========');
   console.log(data);
-  console.log(state.merge({ loading: false, ...data }));
-  console.log('============success========================');
+  console.log('======config======success===========');
   return state.merge({ loading: false, ...data })
 }
 
 // failed to get the avatar
 export const failure = (state, { data }) => {
-  console.log('============failure========================');
-  console.log(data);
-  console.log('============failure========================');
   return state.merge({ loading: false })
 }
 
