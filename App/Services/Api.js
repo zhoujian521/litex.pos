@@ -4,9 +4,6 @@ import Config from 'react-native-config';
 
 // our "constructor"
 const create = (baseURL = Config.API_URL) => {
-  console.log('===============Config====================');
-  console.log(baseURL);
-  console.log('===============Config=====================');
   // ------
   // STEP 1
   // ------
@@ -33,7 +30,7 @@ const create = (baseURL = Config.API_URL) => {
     // console.log('==========response==========================');
     // console.log(response);
     // console.log('===========response=========================');
-    // return response;
+    return response;
   });
 
   // ------
@@ -55,6 +52,9 @@ const create = (baseURL = Config.API_URL) => {
   const getUser = (username) => api.get('search/users', { q: username })
 
   const getConfig = () => api.get('/api/v1/config');
+  const login = (params) => api.post('/api/v1/login', params);
+  const getUserInfo = (params) => api.get('/api/v1/userInfo', params);
+  const logout = () => api.post('/api/v1/logout');
 
   // ------
   // STEP 3
@@ -74,7 +74,10 @@ const create = (baseURL = Config.API_URL) => {
     getRate,
     getUser,
 
-    getConfig
+    getConfig,
+    login,
+    getUserInfo,
+    logout
   }
 }
 

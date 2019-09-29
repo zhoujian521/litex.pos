@@ -6,7 +6,7 @@ export default StyleSheet.create({
     height: Metrics.navBarHeight,
   },
   content: {
-    marginTop: Metrics.statusBarHeight,
+    marginTop: Metrics.statusBarHeight + Metrics.baseMargin,
     paddingBottom: Metrics.smallMargin,
     paddingHorizontal: Metrics.baseMargin,
     flexDirection: "row",

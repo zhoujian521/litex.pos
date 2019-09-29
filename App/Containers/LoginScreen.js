@@ -7,6 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { LoginConfig } from '../Config/ContenConfig'
 import { NavigationActions } from 'react-navigation';
 import CommonHeader from '../Components/CommonHeader';
+import UserActions from '../Redux/UserRedux'
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
@@ -30,7 +31,9 @@ class LoginScreen extends Component {
   }
 
   _onPressLogin = () => {
-    this.props.navigate('App');
+    this.props.login({ userName: "sa", password: "sa" })
+    this.props.getUserInfo({ userId: 1 })
+    // this.props.navigate('App');
   }
 
   render() {
@@ -84,7 +87,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  navigate: (route, params) => dispatch(NavigationActions.navigate({routeName: route, params})),
+  navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
+  login: (params) => dispatch(UserActions.login(params)),
+  getUserInfo: (params) => dispatch(UserActions.getUserInfo(params)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

@@ -11,7 +11,8 @@ export const reducers = combineReducers({
   search: require('./SearchRedux').reducer,
   payment: require('./PaymentRedux').reducer,
   assets: require('./AssetsRedux').reducer,
-  config: require('./ConfigRedux').reducer
+  config: require('./ConfigRedux').reducer,
+  user: require('./UserRedux').reducer
 })
 
 export default () => {

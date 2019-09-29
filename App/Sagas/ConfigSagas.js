@@ -5,11 +5,11 @@ import ConfigActions from '../Redux/ConfigRedux'
 export function* getConfig(api, action) {
   // make the call to the api
   const response = yield call(api.getConfig)
-  const { code = 0, msg = "", data } = response.data
+  const { code = 0, msg = "", data } = response.data || {}
   if (!code) {
     yield put(ConfigActions.requestSuccess(data))
     // TODO setBaseUrl
-    // TODO TOST
+    // TODO setBaseUrl
   } else {
     yield put(ConfigActions.requestFailure(data))
   }

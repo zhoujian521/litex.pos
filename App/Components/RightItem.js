@@ -7,6 +7,7 @@ import { Metrics, Colors } from '../Themes';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { MenuConfig } from '../Config/ContenConfig'
 import { NavigationActions } from 'react-navigation';
+import UserActions from '../Redux/UserRedux'
 
 class RightItem extends Component {
 
@@ -31,6 +32,16 @@ class RightItem extends Component {
   _onSelect = (index, option) => {
     const { screen } = option
     screen && this.props.navigate(screen);
+    if (screen) return
+    const { key } = option
+    switch (key) {
+      case "logout":
+          this.props.logout()
+        break;
+
+      default:
+        break;
+    }
   }
 
   render() {
@@ -62,7 +73,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params }))
+  navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
+  logout: () => dispatch(UserActions.logout()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightItem)

@@ -1,17 +1,19 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-import { KeyboardConfig } from '../Config/ContenConfig'
+// import { KeyboardConfig } from '../Config/ContenConfig'
 
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
   update: ['data'],
-  updateInput: ['data'],
+  login: ['data'],
+  logout: ['data'],
+  getUserInfo: ['data'],
   requestSuccess: ['data'],
   requestFailure: ['data'],
 })
 
-export const PaymentTypes = Types
+export const UserTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
@@ -49,27 +51,11 @@ export const update = (state, { data }) => {
   return state.merge({ ...data })
 }
 
-export const updateInput = (state, { data: { input: item } }) => {
-  if (!item) {
-    return state.merge({ input: '' })
-  }
-  const { key, label } = item
-  let { input } = state
-  if (key !== KeyboardConfig.delete.key && input.length < 12) {
-    input += label
-  } else {
-    if (input.length) {
-      input = input.substring(0, input.length - 1);
-    }
-  }
-  return state.merge({ input })
-}
-
 // request the avatar for a user
 export const request = (state, params) => {
-  console.log('============request========================');
+  console.log('=======user=====request=========');
   console.log(params);
-  console.log('============request========================');
+  console.log('=======user=====request=========');
   return state.merge({ loading: true })
 }
 
@@ -94,7 +80,9 @@ export const failure = (state, { data }) => {
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE]: update,
-  [Types.UPDATE_INPUT]: updateInput,
+  [Types.LOGIN]: request,
+  [Types.LOGOUT]: request,
+  [Types.GET_USER_INFO]: request,
   [Types.REQUEST_SUCCESS]: success,
   [Types.REQUEST_FAILURE]: failure
 })
