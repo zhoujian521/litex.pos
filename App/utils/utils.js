@@ -19,3 +19,10 @@ export function isIPhoneXL() {
 }
 
 export const isBeforeAndroid21 = Platform.OS === 'android' && Platform.Version < 21;
+
+
+export async function sleep(time) {
+  return new Promise(resolve => {
+    setTimeout(resolve, time)
+  })
+}

@@ -19,22 +19,10 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  fiat: 'CNY',
-  payment: undefined,
-  input: '',
-  order: {
-    orderId: '2019092516533784284',
-    fiat: {
-      symbol: 'USD',
-      amount: '1.2'
-    },
-    token: {
-      symbol: 'USDT',
-      amount: '1200000',
-      decimal: 6,
-      round: 2
-    }
-  }
+  userId: undefined,
+  status: 0,
+  balance: 0,
+  fiatType: undefined,
 })
 /* ------------- Selectors ------------- */
 
@@ -44,35 +32,24 @@ export const PaymentSelectors = {
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
-  console.log('============update=====payment===================');
-  console.log(data);
-  console.log(state.merge({ ...data }));
-  console.log('============update=====payment===================');
   return state.merge({ ...data })
 }
 
 // request the avatar for a user
 export const request = (state, params) => {
-  console.log('=======user=====request=========');
-  console.log(params);
-  console.log('=======user=====request=========');
   return state.merge({ loading: true })
 }
 
 // successful avatar lookup
 export const success = (state, { data }) => {
-  console.log('============success========================');
+  console.log('======user======success======');
   console.log(data);
-  console.log(state.merge({ loading: false, ...data }));
-  console.log('============success========================');
+  console.log('======user======success=======');
   return state.merge({ loading: false, ...data })
 }
 
 // failed to get the avatar
 export const failure = (state, { data }) => {
-  console.log('============failure========================');
-  console.log(data);
-  console.log('============failure========================');
   return state.merge({ loading: false })
 }
 

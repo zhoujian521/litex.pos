@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects'
 import { path } from 'ramda'
 import UserActions from '../Redux/UserRedux'
 import { NavigationActions } from 'react-navigation';
+import { channel } from 'redux-saga'
 
 export function* login(api, { data: params }) {
   try {
@@ -11,7 +12,9 @@ export function* login(api, { data: params }) {
     if (!code) {
       yield put(UserActions.requestSuccess(data))
       yield put(NavigationActions.navigate({ routeName: 'App' }))
+
       const { userId } = data
+      // channel.put(UserActions.getUserInfo({ userId }))
       const res = yield call(api.getUserInfo, { userId })
       const { code: infoCode = 0, msg: infoMsg = "", data: info } = res.data
       if (!infoCode) {
@@ -20,15 +23,16 @@ export function* login(api, { data: params }) {
         // TODO toast
         yield put(UserActions.requestFailure())
       }
+      
     } else {
       // TODO toast
       yield put(NavigationActions.navigate({ routeName: 'Auth' }))
       yield put(UserActions.requestFailure())
     }
   } catch (error) {
-    console.log('==========login===error=======================');
+    console.log('==========login===error===========');
     console.log(error);
-    console.log('==========login===error=======================');
+    console.log('==========login===error===========');
   }
 }
 
@@ -44,9 +48,9 @@ export function* getUserInfo(api, { data: params }) {
       yield put(UserActions.requestFailure())
     }
   } catch (error) {
-    console.log('==========getUserInfo===error=======================');
+    console.log('==========getUserInfo===error==========');
     console.log(error);
-    console.log('==========getUserInfo===error=======================');
+    console.log('==========getUserInfo===error===========');
   }
 }
 

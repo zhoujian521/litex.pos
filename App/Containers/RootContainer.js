@@ -6,19 +6,20 @@ import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 import ConfigActions from '../Redux/ConfigRedux'
 import PaymentActions from '../Redux/PaymentRedux'
-
+import { DeviceStorage, Keys } from '../Lib/DeviceStorage';
 // Styles
 import styles from './Styles/RootContainerStyles'
 
 class RootContainer extends Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
       this.props.startup()
     }
     this.props.getConfig()
     this.props.socketInit()
+
   }
 
   render() {

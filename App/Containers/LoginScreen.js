@@ -26,9 +26,8 @@ class LoginScreen extends Component {
   }
 
   _onPressLogin = () => {
-    this.props.login({ userName: "sa", password: "sa" })
-    this.props.getUserInfo({ userId: 1 })
-    // this.props.navigate('App');
+    const params = { userName: "sa", password: "sa" }
+    this.props.login(params)
   }
 
   render() {
@@ -41,8 +40,6 @@ class LoginScreen extends Component {
             color={Colors.primary}
           />
           <TextInput style={styles.inputView}
-            // ref={(ref) => this.textInput = ref}
-            // value={setValue}
             placeholder={placeholder}
             blurOnSubmit
             clearButtonMode="while-editing"
@@ -50,7 +47,6 @@ class LoginScreen extends Component {
             onSubmitEditing={this._onSubmitEditing(key)}
             onChangeText={(text) => this._onChangeText(key, text)}
             returnKeyType={returnKey}
-
           />
         </View>
       )
@@ -76,15 +72,9 @@ class LoginScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  }
-}
-
 const mapDispatchToProps = (dispatch) => ({
   navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
-  login: (params) => dispatch(UserActions.login(params)),
-  getUserInfo: (params) => dispatch(UserActions.getUserInfo(params)),
+  login: (params) => dispatch(UserActions.login(params))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(null, mapDispatchToProps)(LoginScreen)

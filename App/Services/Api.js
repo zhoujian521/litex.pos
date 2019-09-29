@@ -27,9 +27,9 @@ const create = (baseURL = Config.API_URL) => {
   });
 
   api.addResponseTransform(response => {
-    // console.log('==========response==========================');
-    // console.log(response);
-    // console.log('===========response=========================');
+    console.log('==========response==========================');
+    console.log(response);
+    console.log('===========response=========================');
     return response;
   });
 

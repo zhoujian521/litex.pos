@@ -100,13 +100,18 @@ const AuthStack = createStackNavigator({
   LoginScreen: { screen: LoginScreen }
 })
 
+const LaunchStack = createStackNavigator({
+  LaunchScreen: { screen: LaunchScreen }
+})
+
 const switchNavigator = createSwitchNavigator(
   {
+    Loading: LaunchStack,
     Auth: AuthStack,
     App: TabNavigator,
   },
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'Loading',
   }
 );
 
