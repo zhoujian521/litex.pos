@@ -7,6 +7,7 @@ import QRCode from 'react-native-qrcode-svg';
 import styles from './Styles/OrderScreenStyle'
 import { Metrics, Images } from '../Themes';
 import CommonHeader from '../Components/CommonHeader';
+const Ramda = require('ramda')
 
 class OrderScreen extends Component {
 
@@ -22,27 +23,10 @@ class OrderScreen extends Component {
   }
 
   render() {
-    const orderInfo = {
-      orderId: '2019092516533784284',
-      fiat: {
-        symbol: 'USD',
-        amount: '1.2'
-      },
-      token: {
-        symbol: 'USDT',
-        amount: '1200000',
-        decimal: 6,
-        round: 2
-      }
-    }
-    const { order = orderInfo } = this.props
-    console.log('============render========================');
-    console.log(order);
-    console.log('============render========================');
-    const { orderId,
-      fiat: { symbol: fiatSymbol, amount: fiatAmount },
-      token: { symbol: tokenSymbol, amount: tokenAmount }
-    } = order
+    const { orderId, fiat, token, fiats } = this.props
+    const array = fiats.filter(item => item.fiatType === fiat.fiatType)
+    const { fiatSymbol } = Ramda.head(array)
+
     return (
       <View style={styles.container} >
         {(Platform.OS === 'ios') ? <View style={{ flex: 0.3 }} /> : null}
@@ -50,13 +34,13 @@ class OrderScreen extends Component {
           <View style={styles.amountSection}>
             <View style={styles.fiatSection}>
               <Text style={styles.leftTitle}>{I18n.t('QRCodeTitle')}</Text>
-              <Text style={styles.rightAmount}>{fiatAmount}</Text>
+              <Text style={styles.rightAmount}>{fiat.amount}</Text>
               <Text style={styles.rightAmount}>{fiatSymbol}</Text>
             </View>
             <View style={[styles.tokenSection, { marginTop: Metrics.smallMargin }]}>
               <Text style={styles.leftTitle}>{I18n.t('QRCodeSubTitle')}</Text>
-              <Text style={styles.rightAmount}>{tokenAmount}</Text>
-              <Text style={styles.rightAmount}>{tokenSymbol}</Text>
+              <Text style={styles.rightAmount}>{token.amount}</Text>
+              <Text style={styles.rightAmount}>{token.symbol}</Text>
             </View>
           </View>
           <View style={styles.qrCodeSection}>
@@ -77,14 +61,14 @@ class OrderScreen extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    payment: { order },
+    payment: {
+      order: {
+        orderId, fiat, token
+      }
+    },
+    config: { fiats }
   } = state;
-  return { order };
+  return { orderId: orderId + '', fiat, token, fiats };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen)
+export default connect(mapStateToProps, null)(OrderScreen)

@@ -42,9 +42,9 @@ export const request = (state, params) => {
 
 // successful avatar lookup
 export const success = (state, { data }) => {
-  console.log('======user======success======');
-  console.log(data);
-  console.log('======user======success=======');
+  // console.log('======user======success======');
+  // console.log(data);
+  // console.log('======user======success=======');
   return state.merge({ loading: false, ...data })
 }
 

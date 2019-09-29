@@ -8,9 +8,10 @@ const { Types, Creators } = createActions({
   update: ['data'],
   updateInput: ['data'],
   pleaseOrder: ['data'],
-  socketInit: ['data'],
   requestSuccess: ['data'],
   requestFailure: ['data'],
+
+  socketInit: ['data'],
 })
 
 export const PaymentTypes = Types
@@ -19,35 +20,22 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  fiat: 'CNY',
-  payment: undefined,
   input: '',
+  payment: undefined,
   order: {
-    orderId: '2019092516533784284',
-    fiat: {
-      symbol: 'USD',
-      amount: '1.2'
-    },
-    token: {
-      symbol: 'USDT',
-      amount: '1200000',
-      decimal: 6,
-      round: 2
-    }
+    orderId: '',
+    fiat: undefined,
+    token: undefined
   }
 })
 /* ------------- Selectors ------------- */
 
 export const PaymentSelectors = {
-  selectAvatar: state => state.github.avatar
+  selectAvatar: state => state.payment.avatar
 }
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
-  console.log('============update=====payment===================');
-  console.log(data);
-  console.log(state.merge({ ...data }));
-  console.log('============update=====payment===================');
   return state.merge({ ...data })
 }
 
@@ -69,9 +57,6 @@ export const updateInput = (state, { data: { input: item } }) => {
 
 // request the avatar for a user
 export const request = (state, params) => {
-  console.log('============request========================');
-  console.log(params);
-  console.log('============request========================');
   return state.merge({ loading: true })
 }
 
@@ -79,16 +64,12 @@ export const request = (state, params) => {
 export const success = (state, { data }) => {
   console.log('======payment======success========');
   console.log(data);
-  console.log(state.merge({ loading: false, ...data }));
   console.log('======payment======success========');
   return state.merge({ loading: false, ...data })
 }
 
 // failed to get the avatar
 export const failure = (state, { data }) => {
-  console.log('============failure========================');
-  console.log(data);
-  console.log('============failure========================');
   return state.merge({ loading: false })
 }
 
@@ -98,7 +79,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE]: update,
   [Types.UPDATE_INPUT]: updateInput,
   [Types.PLEASE_ORDER]: request,
-  // [Types.SOCKET_INIT]: request,
   [Types.REQUEST_SUCCESS]: success,
   [Types.REQUEST_FAILURE]: failure
 })

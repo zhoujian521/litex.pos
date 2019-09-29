@@ -9,12 +9,11 @@ import Feather from 'react-native-vector-icons/Feather';
 import { PaymentConfig, KeyboardConfig } from '../Config/ContenConfig'
 import { NavigationActions, NavigationEvents } from 'react-navigation';
 import PaymentActions from '../Redux/PaymentRedux';
-import { getFiatSymbol } from '../utils/helper'
 import RightItem from '../Components/RightItem';
 import CommonHeader from '../Components/CommonHeader';
 // Styles
 import styles from './Styles/ReceiptScreenStyle'
-
+const Ramda = require('ramda')
 
 class ReceiptScreen extends Component {
 
@@ -26,9 +25,6 @@ class ReceiptScreen extends Component {
         title={I18n.t('ReceiptTab')}
       />
     }
-  }
-
-  componentDidMount = () => {
   }
 
   _onWillFocus = () => {
@@ -45,7 +41,6 @@ class ReceiptScreen extends Component {
     this.props.updatePayment({ payment: key });
     this.props.pleaseOrder({ fiatType: 1, amount: 100.2 });
   }
-
 
   render() {
     const payments = Object.values(PaymentConfig).map((config, index) => {
@@ -92,13 +87,16 @@ class ReceiptScreen extends Component {
       )
     });
 
-    const { input, fiat } = this.props;
+    const { input, fiats, fiatType } = this.props;
+    const array = fiats.filter(item => item.fiatType === fiatType)
+    const { symbol } = Ramda.head(array)
+
     return (
       <View style={styles.mainContainer}>
         <NavigationEvents onWillFocus={() => this._onWillFocus()} />
         <View style={[styles.container, styles.topSection]}>
           <View style={styles.input}>
-            <Text style={styles.symbol}>{getFiatSymbol(fiat)}</Text>
+            <Text style={styles.symbol}>{symbol}</Text>
             <Text style={styles.inputNum}>{input}</Text>
           </View>
         </View>
@@ -115,9 +113,11 @@ class ReceiptScreen extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    payment: { fiat, input },
+    payment: { input },
+    user: { fiatType },
+    config: { fiats }
   } = state;
-  return { fiat, input };
+  return { input, fiats, fiatType };
 }
 
 const mapDispatchToProps = (dispatch) => ({

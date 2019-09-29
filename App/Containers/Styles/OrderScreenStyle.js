@@ -21,7 +21,6 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   amountSection: {
-    alignItems: "center",
     paddingVertical: Metrics.baseMargin,
     borderBottomWidth: 1 / PixelRatio.get(),
     borderBottomColor: Colors.line,
@@ -60,9 +59,13 @@ export default StyleSheet.create({
   leftTitle: {
     color: Colors.text002,
     fontSize: Fonts.size.medium,
+    width: '50%',
+    textAlign: "right",
+    paddingRight: Metrics.smallMargin
   },
   rightAmount: {
     color: Colors.golden,
-    fontSize: Fonts.size.input,
+    fontSize: Fonts.size.medium,
+    paddingRight: Metrics.smallMargin
   }
 })

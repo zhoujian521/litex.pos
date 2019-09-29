@@ -10,21 +10,18 @@ export function* pleaseOrder(api, { data: params }) {
   try {
     // make the call to the api
     const response = yield call(api.pleaseOrder, params)
-    console.log('===========pleaseOrder=========================');
-    console.log(response);
-    console.log('===========pleaseOrder=========================');
     const { code = 0, msg = "", data } = response.data
     if (!code) {
-      yield put(PaymentActions.requestSuccess(data))
+      yield put(PaymentActions.requestSuccess({ order: { ...data } }))
       yield put(NavigationActions.navigate({ routeName: 'OrderScreen' }))
     } else {
       // TODO toast
       yield put(PaymentActions.requestFailure())
     }
   } catch (error) {
-    console.log('==========pleaseOrder===error=========');
+    console.log('====pleaseOrder===error=========');
     console.log(error);
-    console.log('==========pleaseOrder===error==========');
+    console.log('====pleaseOrder===error==========');
   }
 }
 
@@ -36,10 +33,10 @@ export function* socketInit(api, { data }) {
 }
 
 function connect() {
-  console.log('============connect========================');
+  console.log('============connect===========');
   socket && socket.emit('lottery', '1')
 }
 
 function reconnect() {
-  console.log('============reconnect========================');
+  console.log('============reconnect==========');
 }
