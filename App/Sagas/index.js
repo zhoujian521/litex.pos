@@ -9,8 +9,9 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 
 import { ConfigTypes } from '../Redux/ConfigRedux'
-import { PaymentTypes } from '../Redux/PaymentRedux'
 import { UserTypes } from '../Redux/UserRedux'
+import { PaymentTypes } from '../Redux/PaymentRedux'
+import { AssetsTypes } from '../Redux/AssetsRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -19,6 +20,8 @@ import { getUserAvatar } from './GithubSagas'
 
 import { getConfig } from './ConfigSagas'
 import { login, getUserInfo, logout } from './UserSagas'
+import { pleaseOrder, socketInit } from './PaymentSagas'
+import { getOrders, getAssets } from './AssetsSagas'
 
 /* ------------- API ------------- */
 
@@ -40,5 +43,9 @@ export default function* root() {
     takeLatest(UserTypes.LOGIN, login, api),
     takeLatest(UserTypes.GET_USER_INFO, getUserInfo, api),
     takeLatest(UserTypes.LOGOUT, logout, api),
+    takeLatest(PaymentTypes.PLEASE_ORDER, pleaseOrder, api),
+    takeLatest(AssetsTypes.GET_ORDERS, getOrders, api),
+    takeLatest(AssetsTypes.GET_ASSETS, getAssets, api),
+    takeLatest(PaymentTypes.SOCKET_INIT, socketInit, api),
   ])
 }

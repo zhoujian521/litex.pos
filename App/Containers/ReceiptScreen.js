@@ -43,7 +43,7 @@ class ReceiptScreen extends Component {
   _onPressPayment = (payment) => {
     const { key } = payment
     this.props.updatePayment({ payment: key });
-    this.props.navigate('OrderScreen');
+    this.props.pleaseOrder({ fiatType: 1, amount: 100.2 });
   }
 
 
@@ -124,6 +124,7 @@ const mapDispatchToProps = (dispatch) => ({
   navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
   updatePayment: (params) => dispatch(PaymentActions.update(params)),
   updateInput: (params) => dispatch(PaymentActions.updateInput(params)),
+  pleaseOrder: (params) => dispatch(PaymentActions.pleaseOrder(params)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReceiptScreen)

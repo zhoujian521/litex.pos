@@ -7,6 +7,8 @@ import { KeyboardConfig } from '../Config/ContenConfig'
 const { Types, Creators } = createActions({
   update: ['data'],
   updateInput: ['data'],
+  pleaseOrder: ['data'],
+  socketInit: ['data'],
   requestSuccess: ['data'],
   requestFailure: ['data'],
 })
@@ -75,10 +77,10 @@ export const request = (state, params) => {
 
 // successful avatar lookup
 export const success = (state, { data }) => {
-  console.log('============success========================');
+  console.log('======payment======success========');
   console.log(data);
   console.log(state.merge({ loading: false, ...data }));
-  console.log('============success========================');
+  console.log('======payment======success========');
   return state.merge({ loading: false, ...data })
 }
 
@@ -95,6 +97,8 @@ export const failure = (state, { data }) => {
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE]: update,
   [Types.UPDATE_INPUT]: updateInput,
+  [Types.PLEASE_ORDER]: request,
+  // [Types.SOCKET_INIT]: request,
   [Types.REQUEST_SUCCESS]: success,
   [Types.REQUEST_FAILURE]: failure
 })

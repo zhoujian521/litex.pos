@@ -54,12 +54,9 @@ export function* logout(api, action) {
   try {
     // make the call to the api
     const response = yield call(api.logout)
-    console.log('============response========================');
-    console.log(response);
-    console.log('============response========================');
     const { code = 0, msg = "", data } = response.data
     if (!code) {
-      yield put(UserActions.requestSuccess({status: 0}))
+      yield put(UserActions.requestSuccess(data))
       yield put(NavigationActions.navigate({ routeName: 'Auth' }))
     } else {
       // TODO toast

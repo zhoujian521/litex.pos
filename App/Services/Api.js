@@ -55,6 +55,9 @@ const create = (baseURL = Config.API_URL) => {
   const login = (params) => api.post('/api/v1/login', params);
   const getUserInfo = (params) => api.get('/api/v1/userInfo', params);
   const logout = () => api.post('/api/v1/logout');
+  const pleaseOrder = (params) => api.post('/api/v1/placeOrder', params);
+  const getOrders = (params) => api.get('/api/v1/orders', params);
+  const getAssets = (params) => api.get('/api/v1/assets', params);
 
   // ------
   // STEP 3
@@ -77,7 +80,10 @@ const create = (baseURL = Config.API_URL) => {
     getConfig,
     login,
     getUserInfo,
-    logout
+    logout,
+    pleaseOrder,
+    getOrders,
+    getAssets
   }
 }
 

@@ -4,15 +4,20 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import styles from './Styles/AssetsStyle'
 import RefreshListView, { RefreshState } from './RefreshListView'
 import { Colors, Images } from '../Themes';
+import AssetsActions from '../Redux/AssetsRedux'
 
 class Assets extends Component {
 
   _onRefresh = () => {
     console.log('============_onRefresh========================');
+    const params = { userId: 1, page: 1, limit: 20 }
+    this.props.getAssets(params)
   }
 
   _handleLoadMore = () => {
     console.log('============_handleLoadMore========================');
+    const params = { userId: 1, page: 1, limit: 20 }
+    this.props.getAssets(params)
   }
 
   _onPressItem = (item) => {
@@ -72,9 +77,8 @@ const mapStateToProps = (state) => {
   return { aLoading };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  getAssets: (params) => dispatch(AssetsActions.getAssets(params)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Assets)

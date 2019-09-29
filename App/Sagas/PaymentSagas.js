@@ -1,48 +1,44 @@
 import { call, put } from 'redux-saga/effects'
 import { path } from 'ramda'
 import PaymentActions from '../Redux/PaymentRedux'
+import { NavigationActions } from 'react-navigation';
+import SocketIOClient from 'socket.io-client'
+import Config from 'react-native-config';
 
-export function* login(api, { data: params }) {
-  // try {
-  //   // make the call to the api
-  //   const response = yield call(api.login, params)
-  //   const { code = 0, msg = "", data } = response.data
-  //   if (!code) {
-  //     yield put(PaymentActions.requestSuccess(data))
-  //     const { userId } = data
-  //     const res = yield call(api.getUserInfo, { userId })
-  //     const { code: infoCode = 0, msg: infoMsg = "", data: info } = res.data
-  //     if (!infoCode) {
-  //       yield put(PaymentActions.requestSuccess(info))
-  //     } else {
-  //       // TODO toast
-  //       yield put(PaymentActions.requestFailure())
-  //     }
-  //   } else {
-  //     // TODO toast
-  //     yield put(PaymentActions.requestFailure())
-  //   }
-  // } catch (error) {
-  //   console.log('==========login===error=======================');
-  //   console.log(error);
-  //   console.log('==========login===error=======================');
-  // }
+
+export function* pleaseOrder(api, { data: params }) {
+  try {
+    // make the call to the api
+    const response = yield call(api.pleaseOrder, params)
+    console.log('===========pleaseOrder=========================');
+    console.log(response);
+    console.log('===========pleaseOrder=========================');
+    const { code = 0, msg = "", data } = response.data
+    if (!code) {
+      yield put(PaymentActions.requestSuccess(data))
+      yield put(NavigationActions.navigate({ routeName: 'OrderScreen' }))
+    } else {
+      // TODO toast
+      yield put(PaymentActions.requestFailure())
+    }
+  } catch (error) {
+    console.log('==========pleaseOrder===error=======================');
+    console.log(error);
+    console.log('==========pleaseOrder===error=======================');
+  }
 }
 
-export function* getUserInfo(api, { data: params }) {
-  // try {
-  //   // make the call to the api
-  //   const response = yield call(api.getUserInfo, params)
-  //   const { code = 0, msg = "", data } = response.data
-  //   if (!code) {
-  //     yield put(PaymentActions.requestSuccess(data))
-  //   } else {
-  //     // TODO toast
-  //     yield put(PaymentActions.requestFailure())
-  //   }
-  // } catch (error) {
-  //   console.log('==========getUserInfo===error=======================');
-  //   console.log(error);
-  //   console.log('==========getUserInfo===error=======================');
-  // }
+// socket.emit('lottery', W.address)
+export function* socketInit(api, { data }) {
+  yield socket = SocketIOClient(Config.API_URL, { forceNew: true })
+  socket.on('connect', connect)
+    .on('reconnect', reconnect)
+}
+
+function connect() {
+  console.log('============connect========================');
+}
+
+function reconnect() {
+  console.log('============reconnect========================');
 }
