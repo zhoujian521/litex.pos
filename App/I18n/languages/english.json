@@ -49,5 +49,18 @@
   "MenuUpdate": "Update",
   "MenuAbout": "About",
   "MenuLogout": "Logout",
-  "saveBtn": "Save"
+  "saveBtn": "Save",
+
+  "InputUserName": "Please enter user name",
+  "InputPassword": "Please enter password",
+
+  "QRcodeTitle": "Generate qr code",
+  "ScanTitle": "Scan collection",
+
+  "footerRefreshingText": "loading...",
+  "footerFailureText": "reload",
+  "footerNoMoreDataText": "all data has been loaded",
+  "footerEmptyDataText": "there is no relevant data at present",
+
+  "TotalAmount": "Total amount:"
 }

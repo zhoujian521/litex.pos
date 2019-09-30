@@ -23,6 +23,18 @@
   "MenuUpdate": "检查更新",
   "MenuAbout": "关于",
   "MenuLogout": "登出",
-  "saveBtn": "保存"
+  "saveBtn": "保存",
 
+  "InputUserName": "请输入用户名",
+  "InputPassword": "请输入密码",
+
+  "QRcodeTitle": "生成二维码",
+  "ScanTitle": "扫一扫收款",
+
+  "footerRefreshingText": "数据加载中…",
+  "footerFailureText": "点击重新加载",
+  "footerNoMoreDataText": "已加载全部数据",
+  "footerEmptyDataText": "暂时没有相关数据",
+
+  "TotalAmount": "总额:"
 }

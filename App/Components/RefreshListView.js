@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Styles from './Styles/RefreshListViewStyle';
+import I18n from '../I18n'
 
 export const RefreshState = {
   Idle: 0,
@@ -50,10 +51,10 @@ export default class RefreshListView extends Component {
 
     listRef: 'refreshList',
 
-    footerRefreshingText: '数据加载中…',
-    footerFailureText: '点击重新加载',
-    footerNoMoreDataText: '已加载全部数据',
-    footerEmptyDataText: '暂时没有相关数据',
+    footerRefreshingText: I18n.t('footerRefreshingText'),
+    footerFailureText: I18n.t('footerFailureText'),
+    footerNoMoreDataText: I18n.t('footerNoMoreDataText'),
+    footerEmptyDataText: I18n.t('footerEmptyDataText'),
 
     footerRefreshingComponent: null,
     footerFailureComponent: null,

@@ -5,14 +5,14 @@ export const PaymentConfig = {
   qrcode: {
     key: 'qrcode',
     icon: 'qrcode',
-    title: '生成二维码',
+    title: I18n.t('QRcodeTitle'),
     activeTintColor: Colors.primary,
     inactiveTintColor: Colors.text002,
   },
   scan: {
     key: 'scan',
     icon: 'barcode-scan',
-    title: '扫一扫收款',
+    title: I18n.t('ScanTitle'),
     activeTintColor: Colors.primary,
     inactiveTintColor: Colors.text002,
   }
@@ -73,13 +73,13 @@ export const LoginConfig = {
   username: {
     key: 'username',
     icon: 'user',
-    placeholder: '请输入用户名',
+    placeholder: I18n.t('InputUserName'),
     returnKey: "next"
   },
   password: {
     key: 'password',
     icon: 'unlock',
-    placeholder: '请输入密码',
+    placeholder: I18n.t('InputPassword'),
     returnKey: "done"
   }
 };

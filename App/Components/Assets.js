@@ -5,8 +5,11 @@ import styles from './Styles/AssetsStyle'
 import RefreshListView, { RefreshState } from './RefreshListView'
 import { Colors, Images } from '../Themes';
 import AssetsActions from '../Redux/AssetsRedux'
+import I18n from '../I18n'
+var moment = require('moment');
 const Ramda = require('ramda')
 const limit = 10
+
 
 class Assets extends Component {
 
@@ -75,9 +78,9 @@ class Assets extends Component {
     return (
       <View style={styles.container}>
         {data.length ? <View style={styles.header}>
-          <Text>2019-09-26</Text>
+          <Text>{moment().format("YYYY-MM-DD")}</Text>
           <View style={styles.headerRight}>
-            <Text>总额：</Text>
+            <Text>{I18n.t('TotalAmount')}</Text>
             <Text style={{ color: Colors.golden }}>{balance && balance.amount} {balance && balance.symbol}</Text>
           </View>
         </View> : null}

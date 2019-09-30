@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation';
 import UserActions from '../Redux/UserRedux'
 import PaymentActions from '../Redux/PaymentRedux';
+import I18n from '../I18n';
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
@@ -28,6 +29,13 @@ class LaunchScreen extends Component {
     if (Boolean(userId)) {
       this.props.getUserInfo({ userId })
     }
+    const { locale } = this.props;
+    I18n.locale = locale;
+    console.log('=============locale=======================');
+    console.log(locale);
+    console.log(I18n.locale);
+    console.log('=============locale=======================');
+
   }
 
   render() {
@@ -54,9 +62,10 @@ class LaunchScreen extends Component {
 
 const mapStateToProps = (state) => {
   const {
+    config: { locale },
     user: { status, userId }
   } = state;
-  return { status, userId };
+  return { status, userId, locale };
 }
 
 const mapDispatchToProps = (dispatch) => ({
