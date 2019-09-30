@@ -17,16 +17,30 @@ class LoginScreen extends Component {
     }
   }
 
-  _onSubmitEditing = (key) => {
-    console.log(key);
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      password: ''
+    }
   }
 
+  _onSubmitEditing = (key) => { }
+
   _onChangeText = (key, text) => {
-    console.log(key, text);
+    if (key === LoginConfig.username.key) {
+      this.setState({ username: text })
+      return
+    }
+    this.setState({ password: text })
   }
 
   _onPressLogin = () => {
-    const params = { userName: "sa", password: "sa" }
+    const { username, password } = this.state
+    console.log('====================================');
+    console.log(username, password);
+    console.log('====================================');
+    const params = { userName: username, password: password }
     this.props.login(params)
   }
 
@@ -64,9 +78,9 @@ class LoginScreen extends Component {
             <Text style={styles.loginTitle}>{I18n.t('LoginTitle')}</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.bottomSection}>
+        {/* <View style={styles.bottomSection}>
           <Text>{I18n.t('CompanyPrompt')}</Text>
-        </View>
+        </View> */}
       </View>
     )
   }

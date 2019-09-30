@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 import ConfigActions from '../Redux/ConfigRedux'
-import PaymentActions from '../Redux/PaymentRedux'
 import { DeviceStorage, Keys } from '../Lib/DeviceStorage';
 // Styles
 import styles from './Styles/RootContainerStyles'
@@ -18,8 +17,6 @@ class RootContainer extends Component {
       this.props.startup()
     }
     this.props.getConfig()
-    this.props.socketInit()
-
   }
 
   render() {
@@ -36,8 +33,7 @@ class RootContainer extends Component {
 const mapDispatchToProps = (dispatch) => ({
   startup: () => dispatch(StartupActions.startup()),
 
-  getConfig: () => dispatch(ConfigActions.getConfig()),
-  socketInit: () => dispatch(PaymentActions.socketInit())
+  getConfig: () => dispatch(ConfigActions.getConfig())
 })
 
 export default connect(null, mapDispatchToProps)(RootContainer)

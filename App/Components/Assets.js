@@ -22,7 +22,7 @@ class Assets extends Component {
   }
 
   _onRefresh = () => {
-    if (this.props.oLoading) return
+    if (this.props.oLoading === RefreshState.HeaderRefreshing || this.props.oLoading === RefreshState.FooterRefreshing) return
     console.log('==========_onRefresh==========================');
     this.setState({ page: 1 })
     const { userId } = this.props
@@ -31,7 +31,7 @@ class Assets extends Component {
   }
 
   _handleLoadMore = () => {
-    if (this.props.oLoading) return
+    if (this.props.oLoading === RefreshState.FooterRefreshing || this.props.oLoading === RefreshState.HeaderRefreshing) return
     console.log('===========_handleLoadMore=========================');
     let { page } = this.state
     page += 1
@@ -46,6 +46,7 @@ class Assets extends Component {
   }
 
   _renderItem = ({ item, index }) => {
+
     const { fiat, token, stamp } = item;
     const array = this.props.fiats.filter(item => item.fiatType === fiat.fiatType)
     const { fiatSymbol } = Ramda.head(array)
@@ -61,8 +62,8 @@ class Assets extends Component {
             </View>
           </View>
           <View style={styles.itemSection}>
-            <Text style={styles.tokenText}>收款/退款 {token.amount} {token.symbol}</Text>
-            <Text style={styles.fiatText}>{fiat.amount} {fiatSymbol}</Text>
+            <Text style={styles.tokenText}>收款/退款 {token && token.amount} {token.symbol}</Text>
+            <Text style={styles.fiatText}>{fiat && fiat.amount} {fiatSymbol}</Text>
           </View>
         </View>
       </TouchableOpacity>)
@@ -70,17 +71,6 @@ class Assets extends Component {
 
   render() {
     const { assets: data, aLoading, balance } = this.props
-    const { amount, symbol } = balance
-    // let { page } = this.state;
-    // if (aLoading === RefreshState.NoMoreData) {
-    //   if (page > 1) {
-    //     page = page - 1
-    //   } else {
-    //     page = 1
-    //   }
-    //   this.setState({ page })
-    // }
-    // if (aLoading === RefreshState.EmptyData) this.setState({ page: 1 })
 
     return (
       <View style={styles.container}>
@@ -88,7 +78,7 @@ class Assets extends Component {
           <Text>2019-09-26</Text>
           <View style={styles.headerRight}>
             <Text>总额：</Text>
-            <Text style={{ color: Colors.golden }}>{amount} {symbol}</Text>
+            <Text style={{ color: Colors.golden }}>{balance && balance.amount} {balance && balance.symbol}</Text>
           </View>
         </View> : null}
         <RefreshListView

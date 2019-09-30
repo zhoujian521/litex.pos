@@ -1,12 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { Metrics, Colors, Fonts } from '../../Themes';
+const margin = Platform.OS === 'ios' ? Metrics.baseMargin : 0
 
 export default StyleSheet.create({
   container: {
     height: Metrics.navBarHeight,
   },
   content: {
-    marginTop: Metrics.statusBarHeight + Metrics.baseMargin,
+    marginTop: Metrics.statusBarHeight + margin,
     paddingBottom: Metrics.smallMargin,
     paddingHorizontal: Metrics.baseMargin,
     flexDirection: "row",

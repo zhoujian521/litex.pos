@@ -84,8 +84,12 @@ export const success = (state, { type, data }) => {
         status = RefreshState.NoMoreData
       }
       if (!isEmptyArray(orders)) {
-        array = [...array, ...orders];
         status = RefreshState.Idle
+        if (page === 1) {
+          array = orders;
+        } else {
+          array = [...array, ...orders];
+        }
       }
       return state.merge({ oLoading: status, orders: array })
     }
@@ -101,7 +105,12 @@ export const success = (state, { type, data }) => {
         status = RefreshState.NoMoreData
       }
       if (!isEmptyArray(assets)) {
-        array = [...array, ...assets];
+        if (page === 1) {
+          array = assets;
+        } else {
+          array = [...array, ...assets];
+        }
+
         status = RefreshState.Idle
       }
       return state.merge({ balance, aLoading: status, assets: array })

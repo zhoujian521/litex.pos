@@ -20,7 +20,7 @@ class Orders extends Component {
   ]
 
   _onRefresh = () => {
-    if (this.props.oLoading) return
+    if (this.props.oLoading === RefreshState.HeaderRefreshing) return
     console.log('==========_onRefresh==========================');
     this.setState({ page: 1 })
     const { userId } = this.props
@@ -29,7 +29,7 @@ class Orders extends Component {
   }
 
   _handleLoadMore = () => {
-    if (this.props.oLoading) return
+    if (this.props.oLoading === RefreshState.FooterRefreshing) return
     console.log('===========_handleLoadMore=========================');
     let { page } = this.state
     page += 1
@@ -59,15 +59,6 @@ class Orders extends Component {
   render() {
     const { oLoading, orders: data } = this.props
     let { page } = this.state;
-    // if (oLoading === RefreshState.NoMoreData) {
-    //   if (page > 1) {
-    //     page = page - 1
-    //   } else {
-    //     page = 1
-    //   }
-    //   this.setState({ page })
-    // }
-    // if (oLoading === RefreshState.EmptyData) this.setState({ page: 1 })
 
     return (
       <View style={styles.container}>

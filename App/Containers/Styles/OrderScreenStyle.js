@@ -1,4 +1,4 @@
-import { StyleSheet, PixelRatio, Platform } from 'react-native'
+import { StyleSheet, PixelRatio } from 'react-native'
 import { ApplicationStyles, Colors } from '../../Themes/'
 import { Metrics, Fonts } from '../../Themes';
 
@@ -59,7 +59,7 @@ export default StyleSheet.create({
   leftTitle: {
     color: Colors.text002,
     fontSize: Fonts.size.medium,
-    width: '50%',
+    width: '40%',
     textAlign: "right",
     paddingRight: Metrics.smallMargin
   },

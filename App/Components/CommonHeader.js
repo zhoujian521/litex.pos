@@ -32,7 +32,7 @@ class CommonHeader extends Component {
       <View style={[styles.container, { backgroundColor: Colors.primary }]}>
         <StatusBar
           animated
-          backgroundColor={Colors.primary}
+          backgroundColor={Colors.text003}
           networkActivityIndicatorVisible
           StatusBarStyle="default"
         />

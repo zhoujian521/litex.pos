@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react'
 import { View, Text, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Styles from './Styles/RefreshListViewStyle';
@@ -15,7 +15,7 @@ export const RefreshState = {
 // const DEBUG = false;
 // const log = (text) => {DEBUG && console.log(text);};
 
-export default class RefreshListView extends React.PureComponent {
+export default class RefreshListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -146,7 +146,7 @@ export default class RefreshListView extends React.PureComponent {
         footer = footerRefreshingComponent || (
           <View style={Styles.footerContainer} >
             <ActivityIndicator size="small" color="#888888" />
-            <Text style={[Styles.footerText, refreshStyle]}>{footerRefreshingText}>{footerRefreshingText}</Text>
+            <Text style={[Styles.footerText, refreshStyle]}>{footerRefreshingText}</Text>
           </View>);
         return footer;
       }

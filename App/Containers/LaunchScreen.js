@@ -5,7 +5,7 @@ import { sleep } from '../utils/utils'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation';
 import UserActions from '../Redux/UserRedux'
-
+import PaymentActions from '../Redux/PaymentRedux';
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
@@ -24,6 +24,7 @@ class LaunchScreen extends Component {
     } else {
       this.props.navigate('Auth');
     }
+    this.props.socketInit()
     if (Boolean(userId)) {
       this.props.getUserInfo({ userId })
     }
@@ -61,6 +62,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   navigate: (route) => dispatch(NavigationActions.navigate({ routeName: route })),
   getUserInfo: (params) => dispatch(UserActions.getUserInfo(params)),
+  socketInit: () => dispatch(PaymentActions.socketInit())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)

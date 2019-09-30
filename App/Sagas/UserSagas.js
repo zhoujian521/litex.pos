@@ -3,6 +3,7 @@ import { path } from 'ramda'
 import UserActions from '../Redux/UserRedux'
 import { NavigationActions } from 'react-navigation';
 import { channel } from 'redux-saga'
+let global = require('../../global');
 
 export function* login(api, { data: params }) {
   try {
@@ -13,8 +14,10 @@ export function* login(api, { data: params }) {
       yield put(UserActions.requestSuccess(data))
       yield put(NavigationActions.navigate({ routeName: 'App' }))
 
-      const { userId } = data
-      // channel.put(UserActions.getUserInfo({ userId }))
+      let { userId } = data
+      userId = userId + ''
+      global.socket && userId && global.socket.emit('login', userId)
+
       const res = yield call(api.getUserInfo, { userId })
       const { code: infoCode = 0, msg: infoMsg = "", data: info } = res.data
       if (!infoCode) {
@@ -23,7 +26,7 @@ export function* login(api, { data: params }) {
         // TODO toast
         yield put(UserActions.requestFailure())
       }
-      
+
     } else {
       // TODO toast
       yield put(NavigationActions.navigate({ routeName: 'Auth' }))
@@ -42,6 +45,11 @@ export function* getUserInfo(api, { data: params }) {
     const response = yield call(api.getUserInfo, params)
     const { code = 0, msg = "", data } = response.data
     if (!code) {
+
+      let { userId } = data
+      userId = userId + ''
+      global.socket && userId && global.socket.emit('login', userId)
+
       yield put(UserActions.requestSuccess(data))
     } else {
       // TODO toast

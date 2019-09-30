@@ -44,11 +44,14 @@ class ReceiptScreen extends Component {
 
   render() {
     const payments = Object.values(PaymentConfig).map((config, index) => {
-      const { key, icon, title } = config
-      let iconView = <AntDesign name={icon}
-        size={Metrics.paymentSize}
-        color={Colors.primary}
-      />
+      const { key, icon = "", title } = config
+      let iconView = null
+      if (key === PaymentConfig.qrcode.key) {
+        iconView = <AntDesign name={icon}
+          size={Metrics.paymentSize}
+          color={Colors.primary}
+        />
+      }
       if (key === PaymentConfig.scan.key) {
         iconView = <Material name={icon}
           size={Metrics.paymentSize}
@@ -124,7 +127,7 @@ const mapDispatchToProps = (dispatch) => ({
   navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
   updatePayment: (params) => dispatch(PaymentActions.update(params)),
   updateInput: (params) => dispatch(PaymentActions.updateInput(params)),
-  pleaseOrder: (params) => dispatch(PaymentActions.pleaseOrder(params)),
+  pleaseOrder: (params) => dispatch(PaymentActions.pleaseOrder(params))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReceiptScreen)

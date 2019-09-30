@@ -1,9 +1,11 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import { path } from 'ramda'
 import PaymentActions from '../Redux/PaymentRedux'
 import { NavigationActions } from 'react-navigation';
 import SocketIOClient from 'socket.io-client'
 import Config from 'react-native-config';
+import { UserSelectors } from '../Redux/UserRedux';
+let global = require('../../global');
 
 
 export function* pleaseOrder(api, { data: params }) {
@@ -28,15 +30,20 @@ export function* pleaseOrder(api, { data: params }) {
 // socket.emit('lottery', W.address)
 export function* socketInit(api, { data }) {
   yield socket = SocketIOClient(Config.API_URL, { forceNew: true })
-  socket.on('connect', connect)
-    .on('reconnect', reconnect)
+  global.socket = socket;
+  let userId = yield select(UserSelectors.selectUserId);
+  socket.on('connect', () => {
+    console.log('===========connect=========================');
+    console.log(userId);
+    console.log('===========connect=========================');
+    userId = userId + ''
+    socket && userId && socket.emit('login', userId)
+  })
+    .on('userPayRes', userPayRes)
 }
 
-function connect() {
-  console.log('============connect===========');
-  socket && socket.emit('lottery', '1')
-}
-
-function reconnect() {
-  console.log('============reconnect==========');
+function userPayRes(data) {
+  console.log('============userPayRes========================');
+  console.log(data);
+  console.log('============userPayRes========================');
 }

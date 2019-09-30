@@ -27,6 +27,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.2",
     "apisauce": "^1.0.2",
     "format-json": "^1.0.3",
     "identity-obj-proxy": "^3.0.0",

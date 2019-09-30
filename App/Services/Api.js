@@ -1,9 +1,11 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 import Config from 'react-native-config';
-
+console.log('============Config========================');
+console.log(Config);
+console.log('============Config========================');
 // our "constructor"
-const create = (baseURL = Config.API_URL) => {
+const create = (baseURL = Config.API_URL || 'http://192.168.51.77:7002') => {
   // ------
   // STEP 1
   // ------
@@ -30,7 +32,7 @@ const create = (baseURL = Config.API_URL) => {
     // console.log('==========response==========================');
     // console.log(response);
     // console.log('===========response=========================');
-    return response;
+    // return response;
   });
 
   // ------

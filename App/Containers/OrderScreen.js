@@ -19,9 +19,6 @@ class OrderScreen extends Component {
     }
   }
 
-  componentDidMount = () => {
-  }
-
   render() {
     const { orderId, fiat, token, fiats } = this.props
     const array = fiats.filter(item => item.fiatType === fiat.fiatType)
