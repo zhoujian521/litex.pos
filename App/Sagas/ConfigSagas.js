@@ -10,7 +10,7 @@ export function* getConfig(api, action) {
     if (!code) {
       yield put(ConfigActions.requestSuccess(data))
     } else {
-      yield put(ConfigActions.requestFailure(data))
+      yield put(ConfigActions.requestFailure())
     }
   } catch (error) {
     console.log('=======getConfig=====error========');
@@ -18,5 +18,6 @@ export function* getConfig(api, action) {
     console.log('=======getConfig=====error========');
   }
 }
+
 
 

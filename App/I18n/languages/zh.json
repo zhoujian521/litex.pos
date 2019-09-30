@@ -36,5 +36,9 @@
   "footerNoMoreDataText": "已加载全部数据",
   "footerEmptyDataText": "暂时没有相关数据",
 
-  "TotalAmount": "总额:"
+  "TotalAmount": "总额:",
+
+  "OrderStatus012": "待支付",
+  "OrderStatus003": "订单完成",
+  "OrderStatus004": "订单失败"
 }

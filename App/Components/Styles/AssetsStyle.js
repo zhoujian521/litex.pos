@@ -26,7 +26,7 @@ export default StyleSheet.create({
     fontSize: Fonts.size.medium,
   },
   tokenText: {
-    fontSize: Fonts.size.medium
+    fontSize: Fonts.size.small
   },
   stampText: {
     fontSize: Fonts.size.small,
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     color: Colors.text003,
   },
   fiatText: {
-    fontSize: Fonts.size.small,
+    fontSize: Fonts.size.medium,
     paddingTop: Metrics.smallMargin,
     color: Colors.golden,
   },

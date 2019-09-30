@@ -7,6 +7,7 @@ import ConfigActions from '../Redux/ConfigRedux';
 import { Metrics, Colors } from '../Themes';
 import { StackActions } from 'react-navigation';
 import CommonHeader from '../Components/CommonHeader';
+import UserActions from '../Redux/UserRedux'
 
 // Styles
 import styles from './Styles/CurrencyScreenStyle'
@@ -30,8 +31,10 @@ class CurrencyScreen extends Component {
   }
 
   _onPressSave = () => {
+    const { userId } = this.props;
     const { fiatType } = this.state;
     this.props.updateCurrency({ fiatType });
+    this.props.switchFiat({ userId, fiatType })
     this.props.pop()
   }
 
@@ -77,14 +80,16 @@ class CurrencyScreen extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    config: { fiats, fiatType }
+    config: { fiats, fiatType },
+    user: { userId }
   } = state;
-  return { fiats, fiatType };
+  return { fiats, fiatType, userId };
 }
 
 const mapDispatchToProps = (dispatch) => ({
   pop: () => dispatch(StackActions.pop()),
   updateCurrency: (params) => dispatch(ConfigActions.update(params)),
+  switchFiat: (params) => dispatch(UserActions.switchFiat(params))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyScreen)

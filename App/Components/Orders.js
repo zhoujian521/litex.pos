@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './Styles/OrdersStyle'
 import RefreshListView, { RefreshState } from './RefreshListView'
 import AssetsActions from '../Redux/AssetsRedux'
+import I18n from '../I18n'
+var moment = require('moment');
 const Ramda = require('ramda')
 const limit = 10
 class Orders extends Component {
@@ -18,6 +20,40 @@ class Orders extends Component {
   componentDidMount = () => [
     this._onRefresh()
   ]
+
+  _orderStatus = (status) => {
+    switch (status) {
+      case 1:
+        return I18n.t('OrderStatus012')
+      case 2:
+        return I18n.t('OrderStatus012')
+      case 3:
+        return I18n.t('OrderStatus003')
+      case 4:
+        return I18n.t('OrderStatus004')
+
+      default:
+        break;
+    }
+    return I18n.t('OrderStatus012')
+  }
+
+  _orderBgColor = (status) => {
+    switch (status) {
+      case 1:
+        return "orange"
+      case 2:
+        return "orange"
+      case 3:
+        return "green"
+      case 4:
+        return "red"
+
+      default:
+        break;
+    }
+    return "orange"
+  }
 
   _onRefresh = () => {
     if (this.props.oLoading === RefreshState.HeaderRefreshing) return
@@ -39,21 +75,28 @@ class Orders extends Component {
     this.props.getOrders(params)
   }
 
+  _onPressItem = (item) => {
+    console.log('============_onPressItem========================');
+  }
+
   _renderItem = ({ item, index }) => {
     const { fiat, token, status, stamp, orderId } = item;
     const array = this.props.fiats.filter(item => item.fiatType === fiat.fiatType)
     const { fiatSymbol } = Ramda.head(array)
+    const bgColor = this._orderBgColor(status)
 
-    return (<View key={index} style={styles.itemsContainer}>
-      <View style={[styles.itemSection, { alignItems: "flex-start" }]}>
-        <Text style={styles.statusText}>支付状态：{status}</Text>
-        <Text style={styles.stampText}>{stamp || '时间戳为空'}</Text>
+    return (<TouchableOpacity key={index} onPress={() => this._onPressItem(item)}>
+      <View style={styles.itemsContainer}>
+        <View style={[styles.itemSection, { alignItems: "flex-start" }]}>
+          <Text style={styles.statusText, { color: bgColor }}>{this._orderStatus(status)}</Text>
+          <Text style={styles.stampText}>{moment(stamp).format("YYYY-MM-DD HH:mm:ss")}</Text>
+        </View>
+        <View style={styles.itemSection}>
+          <Text style={styles.tokenText}>+ {token.amount} {token.symbol}</Text>
+          <Text style={styles.fiatText}>{fiat.amount} {fiatSymbol}</Text>
+        </View>
       </View>
-      <View style={styles.itemSection}>
-        <Text style={styles.tokenText}>+ {token.amount} {token.symbol}</Text>
-        <Text style={styles.fiatText}>{fiat.amount} {fiatSymbol}</Text>
-      </View>
-    </View>)
+    </TouchableOpacity>)
   }
 
   render() {

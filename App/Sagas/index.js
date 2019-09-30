@@ -19,7 +19,7 @@ import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
 
 import { getConfig } from './ConfigSagas'
-import { login, getUserInfo, logout } from './UserSagas'
+import { login, getUserInfo, logout, switchFiat } from './UserSagas'
 import { pleaseOrder, socketInit } from './PaymentSagas'
 import { getOrders, getAssets } from './AssetsSagas'
 
@@ -47,5 +47,6 @@ export default function* root() {
     takeLatest(AssetsTypes.GET_ORDERS, getOrders, api),
     takeLatest(AssetsTypes.GET_ASSETS, getAssets, api),
     takeLatest(PaymentTypes.SOCKET_INIT, socketInit, api),
+    takeLatest(UserTypes.SWITCH_FIAT, switchFiat, api)
   ])
 }

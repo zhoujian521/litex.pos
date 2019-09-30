@@ -60,13 +60,13 @@ class Assets extends Component {
           <View style={styles.leftSection}>
             <Image source={Images.LITEXPay} style={styles.image} />
             <View style={[styles.itemSection, { alignItems: "flex-start" }]}>
-              <Text style={styles.statusText}>收款/退款</Text>
-              <Text style={styles.stampText}>{stamp || '时间戳为空'}</Text>
+              <Text style={[styles.statusText, { color: "green" }]}>收款</Text>
+              <Text style={styles.stampText}>{moment(stamp).format("YYYY-MM-DD HH:mm:ss")}</Text>
             </View>
           </View>
           <View style={styles.itemSection}>
-            <Text style={styles.tokenText}>收款/退款 {token && token.amount} {token.symbol}</Text>
-            <Text style={styles.fiatText}>{fiat && fiat.amount} {fiatSymbol}</Text>
+            <Text style={styles.fiatText}>+{fiat && fiat.amount} {fiatSymbol}</Text>
+            <Text style={styles.tokenText}>{token && token.amount} {token.symbol}</Text>
           </View>
         </View>
       </TouchableOpacity>)

@@ -62,5 +62,9 @@
   "footerNoMoreDataText": "all data has been loaded",
   "footerEmptyDataText": "there is no relevant data at present",
 
-  "TotalAmount": "Total amount:"
+  "TotalAmount": "Total amount:",
+
+  "OrderStatus012": "pending",
+  "OrderStatus003": "finish",
+  "OrderStatus004": "failed"
 }

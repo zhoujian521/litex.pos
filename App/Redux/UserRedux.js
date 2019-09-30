@@ -11,6 +11,7 @@ const { Types, Creators } = createActions({
   getUserInfo: ['data'],
   requestSuccess: ['data'],
   requestFailure: ['data'],
+  switchFiat: ['data']
 })
 
 export const UserTypes = Types
@@ -61,5 +62,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT]: request,
   [Types.GET_USER_INFO]: request,
   [Types.REQUEST_SUCCESS]: success,
-  [Types.REQUEST_FAILURE]: failure
+  [Types.REQUEST_FAILURE]: failure,
+  [Types.SWITCH_FIAT]: request
 })

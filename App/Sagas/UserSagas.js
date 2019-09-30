@@ -81,3 +81,20 @@ export function* logout(api, action) {
     console.log('==========logout===error=======================');
   }
 }
+
+export function* switchFiat(api, { data: params }) {
+  try {
+    // make the call to the api
+    const response = yield call(api.switchFiat, params)
+    const { code = 0, msg = "", data } = response.data
+    if (!code) {
+      yield put(UserActions.requestSuccess(data))
+    } else {
+      yield put(UserActions.requestFailure())
+    }
+  } catch (error) {
+    console.log('=======switchFiat=====error========');
+    console.log(error);
+    console.log('=======switchFiat=====error========');
+  }
+}

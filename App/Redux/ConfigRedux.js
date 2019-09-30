@@ -9,7 +9,7 @@ const { Types, Creators } = createActions({
   update: ['data'],
   getConfig: ['data'],
   requestSuccess: ['data'],
-  requestFailure: ['data'],
+  requestFailure: ['data']
 })
 
 export const ConfigTypes = Types
@@ -22,7 +22,6 @@ export const INITIAL_STATE = Immutable({
   baseUrl: "",
   contacts: undefined,
   fiats: [],
-  fiatType: undefined,
   locale: undefined
 })
 /* ------------- Selectors ------------- */

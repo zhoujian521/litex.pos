@@ -32,7 +32,7 @@ const create = (baseURL = Config.API_URL || 'http://192.168.51.77:7002') => {
     // console.log('==========response==========================');
     // console.log(response);
     // console.log('===========response=========================');
-    // return response;
+    return response;
   });
 
   // ------
@@ -60,6 +60,7 @@ const create = (baseURL = Config.API_URL || 'http://192.168.51.77:7002') => {
   const pleaseOrder = (params) => api.post('/api/v1/placeOrder', params);
   const getOrders = (params) => api.get('/api/v1/orders', params);
   const getAssets = (params) => api.get('/api/v1/assets', params);
+  const switchFiat = (params) => api.post('/api/v1/switchFiat', params);
 
   // ------
   // STEP 3
@@ -85,7 +86,8 @@ const create = (baseURL = Config.API_URL || 'http://192.168.51.77:7002') => {
     logout,
     pleaseOrder,
     getOrders,
-    getAssets
+    getAssets,
+    switchFiat
   }
 }
 
