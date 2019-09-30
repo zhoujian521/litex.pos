@@ -62,9 +62,9 @@ export const request = (state, params) => {
 
 // successful avatar lookup
 export const success = (state, { data }) => {
-  console.log('======payment======success========');
-  console.log(data);
-  console.log('======payment======success========');
+  // console.log('======payment======success========');
+  // console.log(data);
+  // console.log('======payment======success========');
   return state.merge({ loading: false, ...data })
 }
 

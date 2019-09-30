@@ -7,7 +7,7 @@ const colors = {
   text001: '#333333',
   text002: '#666666',
   text003: '#999999',
-  golden: '#F8D859',
+  golden: 'rgb(242, 156, 56)',
 
 
   clear: 'rgba(0,0,0,0)',

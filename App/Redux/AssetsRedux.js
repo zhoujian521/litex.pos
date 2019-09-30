@@ -1,6 +1,7 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-// import { KeyboardConfig } from '../Config/ContenConfig'
+import { RefreshState } from '../Components/RefreshListView'
+import { isEmptyArray } from '../utils/utils'
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -10,6 +11,11 @@ const { Types, Creators } = createActions({
   getAssets: ['data'],
   requestSuccess: ['data'],
   requestFailure: ['data'],
+
+  getOrdersSuccess: ['data'],
+  getAssetsSuccess: ['data'],
+  getOrdersFailure: ['data'],
+  getAssetsFailure: ['data'],
 })
 
 export const AssetsTypes = Types
@@ -18,61 +24,110 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  fiat: 'CNY',
-  payment: undefined,
-  input: '',
-  order: {
-    orderId: '2019092516533784284',
-    fiat: {
-      symbol: 'USD',
-      amount: '1.2'
-    },
-    token: {
-      symbol: 'USDT',
-      amount: '1200000',
-      decimal: 6,
-      round: 2
-    }
-  }
+  oLoading: RefreshState.Idle,
+  aLoading: 0,
+  balance: undefined,
+  orders: [],
+  assets: []
 })
 /* ------------- Selectors ------------- */
 
-export const PaymentSelectors = {
-  selectAvatar: state => state.github.avatar
+export const AssetsSelectors = {
+  selectOrders: state => state.assets.orders,
+  selectAssets: state => state.assets.assets,
 }
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
-  console.log('============update=====payment===================');
-  console.log(data);
-  console.log(state.merge({ ...data }));
-  console.log('============update=====payment===================');
   return state.merge({ ...data })
 }
 
 // request the avatar for a user
 export const request = (state, params) => {
-  console.log('=======Assets=====request=========');
-  console.log(params);
-  console.log('=======Assets=====request=========');
-  return state.merge({ loading: true })
+  const { type, data: { page } } = params
+  let status = RefreshState.Idle
+  if (page === 1) {
+    status = RefreshState.HeaderRefreshing
+  } else {
+    status = RefreshState.FooterRefreshing
+  }
+  switch (type) {
+    case "GET_ORDERS":
+      return state.merge({ oLoading: status })
+    case "GET_ASSETS":
+      return state.merge({ aLoading: status })
+
+    default:
+
+      break;
+  }
+  return state.merge({ oLoading: RefreshState.Idle, aLoading: RefreshState.Idle })
 }
 
 // successful avatar lookup
-export const success = (state, { data }) => {
-  console.log('============success========================');
-  console.log(data);
-  console.log(state.merge({ loading: false, ...data }));
-  console.log('============success========================');
-  return state.merge({ loading: false, ...data })
+export const success = (state, { type, data }) => {
+  // console.log('=========success===========================');
+  // console.log(type, data);
+  // console.log(state.orders);
+  // console.log('=========success===========================');
+  let status = RefreshState.Idle
+
+  switch (type) {
+    case "GET_ORDERS_SUCCESS": {
+      const { orders, page } = data
+      let array = state.orders;
+      if (isEmptyArray(orders) && page === 1) {
+        array = []
+        status = RefreshState.EmptyData
+      }
+      if (isEmptyArray(orders) && page > 1) {  // -1
+        status = RefreshState.NoMoreData
+      }
+      if (!isEmptyArray(orders)) {
+        array = [...array, ...orders];
+        status = RefreshState.Idle
+      }
+      return state.merge({ oLoading: status, orders: array })
+    }
+
+    case "GET_ASSETS_SUCCESS": {
+      const { balance, assets, page } = data
+      let array = state.assets;
+      if (isEmptyArray(assets) && page === 1) {
+        array = []
+        status = RefreshState.EmptyData
+      }
+      if (isEmptyArray(assets) && page > 1) { // -1
+        status = RefreshState.NoMoreData
+      }
+      if (!isEmptyArray(assets)) {
+        array = [...array, ...assets];
+        status = RefreshState.Idle
+      }
+      return state.merge({ balance, aLoading: status, assets: array })
+    }
+
+    default:
+      break;
+  }
+
+  return state.merge({ oLoading: RefreshState.Idle, aLoading: RefreshState.Idle })
 }
 
 // failed to get the avatar
-export const failure = (state, { data }) => {
-  console.log('============failure========================');
-  console.log(data);
-  console.log('============failure========================');
-  return state.merge({ loading: false })
+export const failure = (state, { type, data }) => {
+  switch (type) {
+    case "GET_ORDERS_SUCCESS":
+      return state.merge({ oLoading: RefreshState.Failure })
+    case "GET_ASSETS_SUCCESS":
+      return state.merge({ aLoading: RefreshState.Failure })
+
+    default:
+
+      break;
+  }
+
+  return state.merge({ oLoading: RefreshState.Idle, aLoading: RefreshState.Idle })
 }
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -82,5 +137,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_ORDERS]: request,
   [Types.GET_ASSETS]: request,
   [Types.REQUEST_SUCCESS]: success,
-  [Types.REQUEST_FAILURE]: failure
+  [Types.REQUEST_FAILURE]: failure,
+  [Types.GET_ORDERS_SUCCESS]: success,
+  [Types.GET_ASSETS_SUCCESS]: success,
+  [Types.GET_ORDERS_FAILURE]: failure,
+  [Types.GET_ASSETS_FAILURE]: failure,
 })

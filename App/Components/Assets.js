@@ -5,18 +5,39 @@ import styles from './Styles/AssetsStyle'
 import RefreshListView, { RefreshState } from './RefreshListView'
 import { Colors, Images } from '../Themes';
 import AssetsActions from '../Redux/AssetsRedux'
+const Ramda = require('ramda')
+const limit = 10
 
 class Assets extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      page: 1
+    }
+  }
+
+  componentDidMount = () => {
+    this._onRefresh()
+  }
+
   _onRefresh = () => {
-    console.log('============_onRefresh========================');
-    const params = { userId: 1, page: 1, limit: 20 }
+    if (this.props.oLoading) return
+    console.log('==========_onRefresh==========================');
+    this.setState({ page: 1 })
+    const { userId } = this.props
+    const params = { userId, page: 1, limit }
     this.props.getAssets(params)
   }
 
   _handleLoadMore = () => {
-    console.log('============_handleLoadMore========================');
-    const params = { userId: 1, page: 1, limit: 20 }
+    if (this.props.oLoading) return
+    console.log('===========_handleLoadMore=========================');
+    let { page } = this.state
+    page += 1
+    this.setState({ page })
+    const { userId } = this.props
+    const params = { userId, page, limit }
     this.props.getAssets(params)
   }
 
@@ -24,8 +45,11 @@ class Assets extends Component {
     console.log('============_onPressItem========================');
   }
 
-
   _renderItem = ({ item, index }) => {
+    const { fiat, token, stamp } = item;
+    const array = this.props.fiats.filter(item => item.fiatType === fiat.fiatType)
+    const { fiatSymbol } = Ramda.head(array)
+
     return (
       <TouchableOpacity key={index} onPress={() => this._onPressItem(item)}>
         <View style={styles.itemsContainer}>
@@ -33,30 +57,40 @@ class Assets extends Component {
             <Image source={Images.LITEXPay} style={styles.image} />
             <View style={[styles.itemSection, { alignItems: "flex-start" }]}>
               <Text style={styles.statusText}>收款/退款</Text>
-              <Text style={styles.stampText}>2019-09-25 17:21:47</Text>
+              <Text style={styles.stampText}>{stamp || '时间戳为空'}</Text>
             </View>
           </View>
           <View style={styles.itemSection}>
-            <Text style={styles.tokenText}>+ 0.13564700 USDT</Text>
-            <Text style={styles.fiatText}>1.00 CNY</Text>
+            <Text style={styles.tokenText}>收款/退款 {token.amount} {token.symbol}</Text>
+            <Text style={styles.fiatText}>{fiat.amount} {fiatSymbol}</Text>
           </View>
         </View>
       </TouchableOpacity>)
   }
 
   render() {
-    const { aLoading } = this.props
-    const data = [{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }, { key: 'e' }, { key: 'f' }];
+    const { assets: data, aLoading, balance } = this.props
+    const { amount, symbol } = balance
+    // let { page } = this.state;
+    // if (aLoading === RefreshState.NoMoreData) {
+    //   if (page > 1) {
+    //     page = page - 1
+    //   } else {
+    //     page = 1
+    //   }
+    //   this.setState({ page })
+    // }
+    // if (aLoading === RefreshState.EmptyData) this.setState({ page: 1 })
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
+        {data.length ? <View style={styles.header}>
           <Text>2019-09-26</Text>
           <View style={styles.headerRight}>
             <Text>总额：</Text>
-            <Text style={{ color: Colors.golden }}>$ 25000.12</Text>
+            <Text style={{ color: Colors.golden }}>{amount} {symbol}</Text>
           </View>
-        </View>
+        </View> : null}
         <RefreshListView
           style={styles.container}
           data={data}
@@ -72,9 +106,11 @@ class Assets extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    assets: { aLoading },
+    user: { userId },
+    assets: { aLoading, assets, balance },
+    config: { fiats }
   } = state;
-  return { aLoading };
+  return { aLoading, assets, fiats, balance, userId };
 }
 
 const mapDispatchToProps = (dispatch) => ({

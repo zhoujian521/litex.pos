@@ -4,43 +4,76 @@ import { View, Text } from 'react-native'
 import styles from './Styles/OrdersStyle'
 import RefreshListView, { RefreshState } from './RefreshListView'
 import AssetsActions from '../Redux/AssetsRedux'
-
+const Ramda = require('ramda')
+const limit = 10
 class Orders extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      page: 1
+    }
+  }
+
+  componentDidMount = () => [
+    this._onRefresh()
+  ]
+
   _onRefresh = () => {
-    console.log('============_onRefresh========================');
-    const params = { userId: 1, page: 1, limit: 20 }
+    if (this.props.oLoading) return
+    console.log('==========_onRefresh==========================');
+    this.setState({ page: 1 })
+    const { userId } = this.props
+    const params = { userId, page: 1, limit }
     this.props.getOrders(params)
   }
 
   _handleLoadMore = () => {
-    console.log('============_handleLoadMore========================');
-    const params = { userId: 1, page: 1, limit: 20 }
+    if (this.props.oLoading) return
+    console.log('===========_handleLoadMore=========================');
+    let { page } = this.state
+    page += 1
+    this.setState({ page })
+    const { userId } = this.props
+    const params = { userId, page, limit }
     this.props.getOrders(params)
   }
 
   _renderItem = ({ item, index }) => {
+    const { fiat, token, status, stamp, orderId } = item;
+    const array = this.props.fiats.filter(item => item.fiatType === fiat.fiatType)
+    const { fiatSymbol } = Ramda.head(array)
+
     return (<View key={index} style={styles.itemsContainer}>
       <View style={[styles.itemSection, { alignItems: "flex-start" }]}>
-        <Text style={styles.statusText}>收款成功</Text>
-        <Text style={styles.stampText}>2019-09-25 17:21:47</Text>
+        <Text style={styles.statusText}>支付状态：{status}</Text>
+        <Text style={styles.stampText}>{stamp || '时间戳为空'}</Text>
       </View>
       <View style={styles.itemSection}>
-        <Text style={styles.tokenText}>+ 0.13564700 USDT</Text>
-        <Text style={styles.fiatText}>1.00 CNY</Text>
+        <Text style={styles.tokenText}>+ {token.amount} {token.symbol}</Text>
+        <Text style={styles.fiatText}>{fiat.amount} {fiatSymbol}</Text>
       </View>
     </View>)
   }
 
   render() {
-    const { oLoading } = this.props
-    const data = [{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }, { key: 'e' }, { key: 'f' }];
+    const { oLoading, orders: data } = this.props
+    let { page } = this.state;
+    // if (oLoading === RefreshState.NoMoreData) {
+    //   if (page > 1) {
+    //     page = page - 1
+    //   } else {
+    //     page = 1
+    //   }
+    //   this.setState({ page })
+    // }
+    // if (oLoading === RefreshState.EmptyData) this.setState({ page: 1 })
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
+        {data.length ? <View style={styles.header}>
           <Text>已经是最新数据了</Text>
-        </View>
+        </View> : null}
         <RefreshListView
           style={styles.container}
           data={data}
@@ -56,9 +89,11 @@ class Orders extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    assets: { oLoading },
+    user: { userId },
+    assets: { oLoading, orders },
+    config: { fiats }
   } = state;
-  return { oLoading };
+  return { oLoading, orders, fiats, userId };
 }
 
 const mapDispatchToProps = (dispatch) => ({
