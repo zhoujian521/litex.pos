@@ -34,10 +34,10 @@ export function* socketInit(api, { data }) {
   let userId = yield select(UserSelectors.selectUserId);
   socket.on('connect', () => {
     console.log('===========connect=========================');
-    console.log(userId);
+    console.log({ userId });
     console.log('===========connect=========================');
     userId = userId + ''
-    socket && userId && socket.emit('login', userId)
+    socket && userId && socket.emit('login', { userId })
   })
     .on('userPayRes', userPayRes)
 }

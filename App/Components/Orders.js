@@ -105,9 +105,6 @@ class Orders extends Component {
 
     return (
       <View style={styles.container}>
-        {/* {data.length ? <View style={styles.header}>
-          <Text>已经是最新数据了</Text>
-        </View> : null} */}
         <RefreshListView
           style={styles.container}
           data={data}

@@ -29,7 +29,7 @@ export default StyleSheet.create({
     width: boxW,
     height: Metrics.doubleSection,
     borderColor: "#dddddd",
-    borderWidth: 0.2,
+    borderWidth: 1 / PixelRatio.get(),
     margin: Metrics.horizontalLineHeight,
 
     shadowColor: Colors.text003,
@@ -57,7 +57,7 @@ export default StyleSheet.create({
     fontSize: Fonts.size.h4,
     color: "red",
     marginBottom: Metrics.smallMargin,
-    alignSelf:'flex-end'
+    alignSelf: 'flex-end'
   },
   inputNum: {
     fontSize: Fonts.size.h1,

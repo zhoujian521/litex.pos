@@ -77,7 +77,7 @@ class Assets extends Component {
 
     return (
       <View style={styles.container}>
-        {data.length ? <View style={styles.header}>
+        {data && data.length ? <View style={styles.header}>
           <Text>{moment().format("YYYY-MM-DD")}</Text>
           <View style={styles.headerRight}>
             <Text>{I18n.t('TotalAmount')}</Text>

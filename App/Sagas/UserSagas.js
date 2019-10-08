@@ -16,6 +16,9 @@ export function* login(api, { data: params }) {
 
       let { userId } = data
       userId = userId + ''
+      console.log('=======02======={ userId }======================');
+      console.log({ userId });
+      console.log('=======02======={ userId }======================');
       global.socket && userId && global.socket.emit('login', { userId })
 
       const res = yield call(api.getUserInfo, { userId })
@@ -48,6 +51,9 @@ export function* getUserInfo(api, { data: params }) {
 
       let { userId } = data
       userId = userId + ''
+      console.log('======01========{ userId }======================');
+      console.log({ userId });
+      console.log('=======01======={ userId }======================');
       global.socket && userId && global.socket.emit('login', { userId })
 
       yield put(UserActions.requestSuccess(data))

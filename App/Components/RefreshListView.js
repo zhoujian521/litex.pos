@@ -99,7 +99,7 @@ export default class RefreshListView extends Component {
 
   _shouldStartFooterRefreshing = () => {
     const { refreshState, data } = this.props;
-    if (!data.length) {
+    if (!data || !data.length) {
       return false;
     }
     return refreshState === RefreshState.Idle;
@@ -185,7 +185,7 @@ export default class RefreshListView extends Component {
   }
   _onPressFailure = () => {
     const { data, onHeaderRefresh, onFooterRefresh } = this.props;
-    if (!data.length) {
+    if (!data || !data.length) {
       onHeaderRefresh && onHeaderRefresh(RefreshState.HeaderRefreshing);
     } else {
       onFooterRefresh && onFooterRefresh(RefreshState.FooterRefreshing);
