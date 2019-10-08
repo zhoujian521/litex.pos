@@ -1,4 +1,5 @@
 import { Dimensions, Platform } from 'react-native'
+import I18n from '../I18n';
 
 const { width: screenW, height: screenH } = Dimensions.get('window')
 // iPhoneX  iPhoneXS

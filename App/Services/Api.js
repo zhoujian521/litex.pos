@@ -1,11 +1,12 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 import Config from 'react-native-config';
-console.log('============Config========================');
-console.log(Config);
-console.log('============Config========================');
+import Toast from 'react-native-root-toast';
+import I18n from '../I18n';
+import { transformApiError } from '../utils/helper'
+import { EventEmitter, EventKeys } from '../utils/EventEmitter';
 // our "constructor"
-const create = (baseURL = Config.API_URL || 'http://192.168.51.77:7002') => {
+const create = (baseURL = Config.API_URL || 'http://192.168.100.213:7002') => {
   // ------
   // STEP 1
   // ------
@@ -32,7 +33,25 @@ const create = (baseURL = Config.API_URL || 'http://192.168.51.77:7002') => {
     // console.log('==========response==========================');
     // console.log(response);
     // console.log('===========response=========================');
-    return response;
+    const { ok } = response
+    if (!response || !ok) {
+      Toast.show(I18n.t('NetworkError'), {
+        shadow: true,
+        position: Toast.positions.CENTER
+      });
+      return
+    }
+    let { code = 0 } = response.data
+    code = parseInt(code)
+    if (!code) return response;
+    const { msg } = transformApiError(code)
+    Toast.show(msg, {
+      shadow: true,
+      position: Toast.positions.CENTER
+    });
+    if (code === 501 || code === 50001) {
+      EventEmitter.emit(EventKeys.USER_IS_NOT_LOGIN);
+    }
   });
 
   // ------

@@ -66,5 +66,14 @@
 
   "OrderStatus012": "pending",
   "OrderStatus003": "finish",
-  "OrderStatus004": "failed"
+  "OrderStatus004": "failed",
+
+  "NetworkError": "NETWORK_ERROR",
+  "Api501Error": "user is not found",
+  "Api502Error": "can't get rate",
+  "Api503Error": "order is not found",
+  "Api504Error": "user or password is wrong",
+  "Api505Error": "fiatType is not supported",
+  "Api506Error": "order has finished",
+  "Api50001Error": "user is not login"
 }

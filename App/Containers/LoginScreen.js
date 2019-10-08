@@ -25,6 +25,13 @@ class LoginScreen extends Component {
     }
   }
 
+  componentDidMount = () => {
+    const { locale } = this.props
+    if (!locale) {
+      I18n.locale = I18n.currentLocale();
+    }
+  }
+
   _onSubmitEditing = (key) => { }
 
   _onChangeText = (key, text) => {
@@ -36,10 +43,7 @@ class LoginScreen extends Component {
   }
 
   _onPressLogin = () => {
-    const { username, password } = this.state
-    console.log('====================================');
-    console.log(username, password);
-    console.log('====================================');
+    const { username, password } = this.state;
     const params = { userName: username, password: password }
     this.props.login(params)
   }
@@ -86,9 +90,16 @@ class LoginScreen extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  const {
+    config: { locale }
+  } = state;
+  return { locale };
+}
+
 const mapDispatchToProps = (dispatch) => ({
   navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
   login: (params) => dispatch(UserActions.login(params))
 })
 
-export default connect(null, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

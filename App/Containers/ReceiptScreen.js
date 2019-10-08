@@ -27,6 +27,13 @@ class ReceiptScreen extends Component {
     }
   }
 
+  componentDidMount = () => {
+    const { locale } = this.props
+    if (!locale) {
+      I18n.locale = I18n.currentLocale();
+    }
+  }
+
   _onWillFocus = () => {
     this.props.updateInput({ input: '' });
     this.props.updatePayment({ payment: undefined });
@@ -118,7 +125,7 @@ const mapStateToProps = (state) => {
   const {
     payment: { input },
     user: { fiatType },
-    config: { fiats }
+    config: { fiats, locale }
   } = state;
   return { input, fiats, fiatType };
 }

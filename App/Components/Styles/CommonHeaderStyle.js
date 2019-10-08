@@ -19,14 +19,16 @@ export default StyleSheet.create({
     height: Metrics.navBarHeight - Metrics.statusBarHeight,
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center"
+    alignItems: "center",
+    paddingLeft: Metrics.baseMargin,
   },
   headerRight: {
     width: 80,
     height: Metrics.navBarHeight - Metrics.statusBarHeight,
     flexDirection: "row",
     justifyContent: "flex-end",
-    alignItems: "center"
+    alignItems: "center",
+    paddingRight: Metrics.baseMargin,
   },
   centerItem: {
     flex: 1,

@@ -5,18 +5,27 @@ import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 import ConfigActions from '../Redux/ConfigRedux'
-import { DeviceStorage, Keys } from '../Lib/DeviceStorage';
+import UserActions from '../Redux/UserRedux'
+import { EventEmitter, EventKeys } from '../utils/EventEmitter';
+import { NavigationActions } from 'react-navigation';
 // Styles
 import styles from './Styles/RootContainerStyles'
 
 class RootContainer extends Component {
 
   async componentDidMount() {
+
+    this.shortcutsSubs = EventEmitter.addListener(EventKeys.USER_IS_NOT_LOGIN, this._logout);
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
       this.props.startup()
     }
     this.props.getConfig()
+  }
+
+  _logout = async () => {
+    this.props.clearUserInfo({ userId: undefined, status: 0, fiatType: undefined })
+    this.props.navigate('Auth');
   }
 
   render() {
@@ -33,7 +42,11 @@ class RootContainer extends Component {
 const mapDispatchToProps = (dispatch) => ({
   startup: () => dispatch(StartupActions.startup()),
 
-  getConfig: () => dispatch(ConfigActions.getConfig())
+  navigate: (route, params) => dispatch(NavigationActions.navigate({ routeName: route, params })),
+  getConfig: () => dispatch(ConfigActions.getConfig()),
+
+  clearUserInfo: (params) => dispatch(UserActions.update(params)),
+  // clearConfig: (params) => dispatch(ConfigActions.update(params))
 })
 
 export default connect(null, mapDispatchToProps)(RootContainer)

@@ -40,5 +40,14 @@
 
   "OrderStatus012": "待支付",
   "OrderStatus003": "订单完成",
-  "OrderStatus004": "订单失败"
+  "OrderStatus004": "订单失败",
+
+  "NetworkError": "网络异常",
+  "Api501Error": "商户未登录",
+  "Api502Error": "获取汇率异常",
+  "Api503Error": "订单异常",
+  "Api504Error": "用户名或密码错误",
+  "Api505Error": "token异常",
+  "Api506Error": "订单已完成",
+  "Api50001Error": "商户已登出"
 }

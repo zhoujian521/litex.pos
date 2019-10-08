@@ -33,10 +33,6 @@ class LanguageScreen extends Component {
   _onPressSave = () => {
     const { locale } = this.state;
     I18n.locale = locale;
-    console.log('=============locale=======================');
-    console.log(locale);
-    console.log(I18n.locale);
-    console.log('=============locale=======================');
     this.props.updateLocale({ locale })
     this.props.pop()
   }

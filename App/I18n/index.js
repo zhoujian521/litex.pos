@@ -31,7 +31,7 @@
 //   return localMsg
 // }
 
-// I18n.defaultLocale = I18n.currentLocale();
+
 // export default {
 //   ...I18n,
 //   t: translateOrFallback
@@ -44,6 +44,8 @@ import I18n from 'react-native-i18n';
 
 import en from './languages/english.json';
 import zh from './languages/zh.json';
+
+I18n.defaultLocale = I18n.currentLocale();
 
 I18n.translations = {
   en,

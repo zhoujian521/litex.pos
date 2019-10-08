@@ -16,7 +16,7 @@ export function* login(api, { data: params }) {
 
       let { userId } = data
       userId = userId + ''
-      global.socket && userId && global.socket.emit('login', userId)
+      global.socket && userId && global.socket.emit('login', { userId })
 
       const res = yield call(api.getUserInfo, { userId })
       const { code: infoCode = 0, msg: infoMsg = "", data: info } = res.data
@@ -48,7 +48,7 @@ export function* getUserInfo(api, { data: params }) {
 
       let { userId } = data
       userId = userId + ''
-      global.socket && userId && global.socket.emit('login', userId)
+      global.socket && userId && global.socket.emit('login', { userId })
 
       yield put(UserActions.requestSuccess(data))
     } else {
@@ -67,6 +67,9 @@ export function* logout(api, action) {
     // make the call to the api
     const response = yield call(api.logout)
     const { code = 0, msg = "", data } = response.data
+    console.log('===========logout=========================');
+    console.log(response);
+    console.log('===========logout=========================');
     if (!code) {
       yield put(UserActions.requestSuccess(data))
       yield put(NavigationActions.navigate({ routeName: 'Auth' }))

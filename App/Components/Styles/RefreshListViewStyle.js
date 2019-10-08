@@ -12,7 +12,7 @@ export default StyleSheet.create({
         backgroundColor: Colors.background,
     },
     footerText: {
-        fontSize: Fonts.size.h6,
+        fontSize: Fonts.size.medium,
         color: Colors.primary,
         backgroundColor: Colors.background,
     }

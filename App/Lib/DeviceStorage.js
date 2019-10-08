@@ -31,6 +31,13 @@ async function getItem(key) {
 }
 
 /**
+* 清空缓存
+*/
+async function clear() {
+  return await AsyncStorage.clear()
+}
+
+/**
 * 改
 * @param key
 * @param value
@@ -49,7 +56,8 @@ export const DeviceStorage = {
   setItem,
   deleteItem,
   updateItem,
-  getItem
+  getItem,
+  clear
 };
 
 export const Keys = StorageKeys;
