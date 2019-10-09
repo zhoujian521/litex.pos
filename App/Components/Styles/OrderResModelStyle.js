@@ -1,4 +1,4 @@
-import { StyleSheet, PixelRatio } from 'react-native'
+import { StyleSheet, PixelRatio, Platform } from 'react-native'
 import { Metrics, Fonts, Colors } from '../../Themes';
 
 export default StyleSheet.create({
@@ -61,6 +61,6 @@ export default StyleSheet.create({
     color: Colors.primary
   },
   leftText: {
-    color: Colors.text002,
+    color: (Platform.OS === 'ios') ? Colors.text002 : Colors.text003,
   }
 })

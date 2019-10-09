@@ -4,6 +4,7 @@ import UserActions from '../Redux/UserRedux'
 import { NavigationActions } from 'react-navigation';
 import { channel } from 'redux-saga'
 let global = require('../../global');
+import { DeviceStorage, Keys } from '../Lib/DeviceStorage'
 
 export function* login(api, { data: params }) {
   try {
@@ -14,14 +15,10 @@ export function* login(api, { data: params }) {
       yield put(UserActions.requestSuccess(data))
       yield put(NavigationActions.navigate({ routeName: 'App' }))
 
-      console.log('=======02======={ userId }======================');
       let { userId } = data
-      userId = userId + ''
-      console.log(global.socket);
-      console.log({ userId });
-      global.socket && userId && global.socket.emit('login', { userId })
-      console.log('=======02======={ userId }======================');
+      DeviceStorage.setItem(Keys.USER_ID, userId)
 
+      global.socket && userId && global.socket.emit('login', { userId: userId + '' })
 
       const res = yield call(api.getUserInfo, { userId })
       const { code: infoCode = 0, msg: infoMsg = "", data: info } = res.data
@@ -52,10 +49,8 @@ export function* getUserInfo(api, { data: params }) {
     if (!code) {
 
       let { userId } = data
-      userId = userId + ''
-      console.log({ userId });
-      console.log(global.socket);
-      global.socket && userId && global.socket.emit('login', { userId })
+      DeviceStorage.setItem(Keys.USER_ID, userId)
+      global.socket && userId && global.socket.emit('login', { userId: userId + '' })
 
       yield put(UserActions.requestSuccess(data))
     } else {

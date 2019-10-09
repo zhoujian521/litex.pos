@@ -87,13 +87,21 @@ class Orders extends Component {
 
     return (<TouchableOpacity key={index} onPress={() => this._onPressItem(item)}>
       <View style={styles.itemsContainer}>
-        <View style={[styles.itemSection, { alignItems: "flex-start" }]}>
+        <View style={[styles.item, { alignItems: "flex-start" }]}>
           <Text style={styles.statusText, { color: bgColor }}>{this._orderStatus(status)}</Text>
-          <Text style={styles.stampText}>{moment(stamp).format("YYYY-MM-DD HH:mm:ss")}</Text>
-        </View>
-        <View style={styles.itemSection}>
           <Text style={styles.tokenText}>+ {token.amount} {token.symbol}</Text>
+        </View>
+        <View style={styles.item}>
+          <Text style={styles.leftText}>法币金额</Text>
           <Text style={styles.fiatText}>{fiat.amount} {fiatSymbol}</Text>
+        </View>
+        <View style={styles.item}>
+          <Text style={styles.leftText}>订 单 号</Text>
+          <Text style={styles.fiatText}>{orderId}</Text>
+        </View>
+        <View style={styles.item}>
+          <Text style={styles.leftText}>订单时间</Text>
+          <Text style={styles.stampText}>{moment(stamp).format("YYYY-MM-DD HH:mm:ss")}</Text>
         </View>
       </View>
     </TouchableOpacity>)

@@ -11,6 +11,7 @@ import { NavigationActions, NavigationEvents } from 'react-navigation';
 import PaymentActions from '../Redux/PaymentRedux';
 import RightItem from '../Components/RightItem';
 import CommonHeader from '../Components/CommonHeader';
+import Toast from 'react-native-root-toast';
 // Styles
 import styles from './Styles/ReceiptScreenStyle'
 const Ramda = require('ramda')
@@ -44,10 +45,18 @@ class ReceiptScreen extends Component {
   }
 
   _onPressPayment = (payment) => {
+    const { input, fiatType } = this.props;
+    const reg = /^[+-]?(\d|[1-9]\d+)(\.\d+)?$/;
+    if (!reg.test(input)) {
+      Toast.show('请输入有效的收款金额', {
+        shadow: true,
+        position: Toast.positions.CENTER
+      });
+      return
+    }
     const { key } = payment
     this.props.updatePayment({ payment: key });
 
-    const { input, fiatType } = this.props;
     const amount = parseFloat(input)
     this.props.pleaseOrder({ fiatType, amount });
   }

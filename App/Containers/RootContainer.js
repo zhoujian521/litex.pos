@@ -10,27 +10,30 @@ import UserActions from '../Redux/UserRedux'
 import { EventEmitter, EventKeys } from '../utils/EventEmitter';
 import { NavigationActions } from 'react-navigation';
 import OrderResModel from '../Components/OrderResModel'
+import { DeviceStorage, Keys } from '../Lib/DeviceStorage'
 // Styles
 import styles from './Styles/RootContainerStyles'
 
 class RootContainer extends Component {
 
   async componentDidMount() {
-
     this.loginStatusListener = EventEmitter.addListener(EventKeys.USER_IS_NOT_LOGIN, this._logout);
     this.payResListener = EventEmitter.addListener(EventKeys.USER_PAY_RES, this._userPayRes);
     this.props.getConfig()
   }
 
+  componentWillUnmount() {
+    this.loginStatusListener.remove();
+    this.payResListener.remove();
+  }
+
   _logout = async () => {
     this.props.clearUserInfo({ userId: undefined, status: 0, fiatType: undefined })
     this.props.navigate('Auth');
+    DeviceStorage.clear();
   }
 
   _userPayRes = (data) => {
-    console.log('================data====================');
-    console.log(data);
-    console.log('===============data=====================');
     this.props.updatePayRes({ payRes: data })
     this.props.updateIsShowModel({ isShowModel: true })
   }

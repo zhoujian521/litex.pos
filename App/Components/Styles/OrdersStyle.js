@@ -1,4 +1,4 @@
-import { StyleSheet, PixelRatio} from 'react-native'
+import { StyleSheet, PixelRatio, Platform } from 'react-native'
 import { Metrics, Fonts, Colors } from '../../Themes';
 
 export default StyleSheet.create({
@@ -6,22 +6,23 @@ export default StyleSheet.create({
     flex: 1,
   },
   itemsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingVertical:  Metrics.baseMargin,
+    flexDirection: "column",
+    paddingVertical: Metrics.baseMargin,
     marginHorizontal: Metrics.doubleBaseMargin,
     borderBottomColor: "#dddddd",
     borderBottomWidth: 1 / PixelRatio.get(),
   },
-  itemSection: {
-    flexDirection: "column",
-    alignItems: "flex-end"
+  item: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: Metrics.baseMargin
   },
   statusText: {
     fontSize: Fonts.size.medium,
   },
   tokenText: {
-    fontSize: Fonts.size.medium
+    fontSize: Fonts.size.medium,
+    color: Colors.golden,
   },
   stampText: {
     fontSize: Fonts.size.small,
@@ -31,11 +32,8 @@ export default StyleSheet.create({
   fiatText: {
     fontSize: Fonts.size.small,
     paddingTop: Metrics.smallMargin,
-    color: Colors.golden,
   },
-  header: {
-    backgroundColor: "#dddddd",
-    paddingHorizontal: Metrics.baseMargin,
-    paddingVertical: Metrics.baseMargin,
+  leftText: {
+    color: (Platform.OS === 'ios') ? Colors.text002 : Colors.text003,
   }
 })

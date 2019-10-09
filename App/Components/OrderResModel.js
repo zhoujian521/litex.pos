@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import Overlay from 'react-native-modal-overlay';
 import ConfigActions from '../Redux/ConfigRedux'
-import { Metrics, Images, Fonts, Colors } from '../Themes';
+import { Images, Fonts, Colors } from '../Themes';
+import { NavigationActions } from 'react-navigation';
 var moment = require('moment');
 const Ramda = require('ramda')
 import I18n from '../I18n'
+
 
 import styles from './Styles/OrderResModelStyle'
 
@@ -14,6 +16,7 @@ class OrderResModel extends Component {
 
   _onComplete = () => {
     this.props.update({ isShowModel: false })
+    this.props.back('ReceiptScreen');
   }
 
   render() {
@@ -36,7 +39,7 @@ class OrderResModel extends Component {
         <View style={styles.center}>
           <View style={styles.item}>
             <Text style={styles.leftText}>{I18n.t('PayAmount')}</Text>
-            {fiat && <Text style={{color: Colors.golden, fontSize: Fonts.size.input}}>{fiat.amount} {fiatSymbol}</Text>}
+            {fiat && <Text style={{ color: Colors.golden, fontSize: Fonts.size.input }}>{fiat.amount} {fiatSymbol}</Text>}
           </View>
           <View style={styles.item}>
             <Text style={styles.leftText}>{I18n.t('OrderNum')}</Text>
@@ -73,7 +76,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  update: (params) => dispatch(ConfigActions.update(params))
+  update: (params) => dispatch(ConfigActions.update(params)),
+  back: (routeName) => dispatch(NavigationActions.back({ routeName })),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderResModel)
