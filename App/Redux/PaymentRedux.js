@@ -26,7 +26,8 @@ export const INITIAL_STATE = Immutable({
     orderId: '',
     fiat: undefined,
     token: undefined
-  }
+  },
+  payRes: undefined
 })
 /* ------------- Selectors ------------- */
 
@@ -47,6 +48,11 @@ export const updateInput = (state, { data: { input: item } }) => {
   let { input } = state
   if (key !== KeyboardConfig.delete.key && input.length < 12) {
     input += label
+    // if (key !== KeyboardConfig.point.key) {
+    //   input = parseFloat(input)
+    //   input = Math.round(input * 100) / 100
+    // }
+    // input += ''
   } else {
     if (input.length) {
       input = input.substring(0, input.length - 1);

@@ -46,7 +46,10 @@ class ReceiptScreen extends Component {
   _onPressPayment = (payment) => {
     const { key } = payment
     this.props.updatePayment({ payment: key });
-    this.props.pleaseOrder({ fiatType: 1, amount: 100.2 });
+
+    const { input, fiatType } = this.props;
+    const amount = parseFloat(input)
+    this.props.pleaseOrder({ fiatType, amount });
   }
 
   render() {
@@ -127,7 +130,7 @@ const mapStateToProps = (state) => {
     user: { fiatType },
     config: { fiats, locale }
   } = state;
-  return { input, fiats, fiatType };
+  return { input, fiats, fiatType, locale };
 }
 
 const mapDispatchToProps = (dispatch) => ({

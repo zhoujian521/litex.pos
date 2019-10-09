@@ -14,12 +14,14 @@ export function* login(api, { data: params }) {
       yield put(UserActions.requestSuccess(data))
       yield put(NavigationActions.navigate({ routeName: 'App' }))
 
+      console.log('=======02======={ userId }======================');
       let { userId } = data
       userId = userId + ''
-      console.log('=======02======={ userId }======================');
+      console.log(global.socket);
       console.log({ userId });
-      console.log('=======02======={ userId }======================');
       global.socket && userId && global.socket.emit('login', { userId })
+      console.log('=======02======={ userId }======================');
+
 
       const res = yield call(api.getUserInfo, { userId })
       const { code: infoCode = 0, msg: infoMsg = "", data: info } = res.data
@@ -51,9 +53,8 @@ export function* getUserInfo(api, { data: params }) {
 
       let { userId } = data
       userId = userId + ''
-      console.log('======01========{ userId }======================');
       console.log({ userId });
-      console.log('=======01======={ userId }======================');
+      console.log(global.socket);
       global.socket && userId && global.socket.emit('login', { userId })
 
       yield put(UserActions.requestSuccess(data))

@@ -22,7 +22,8 @@ export const INITIAL_STATE = Immutable({
   baseUrl: "",
   contacts: undefined,
   fiats: [],
-  locale: undefined
+  locale: undefined,
+  isShowModel: false
 })
 /* ------------- Selectors ------------- */
 
@@ -32,6 +33,9 @@ export const ConfigSelectors = {
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
+  console.log('============data========================');
+  console.log(data);
+  console.log('============data========================');
   return state.merge({ ...data })
 }
 

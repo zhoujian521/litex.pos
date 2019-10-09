@@ -75,5 +75,12 @@
   "Api504Error": "user or password is wrong",
   "Api505Error": "fiatType is not supported",
   "Api506Error": "order has finished",
-  "Api50001Error": "user is not login"
+  "Api50001Error": "user is not login",
+
+  "PayRes": "Success",
+  "PayAmount": "Payment amount",
+  "OrderNum": "Order number",
+  "PayMethod": "Payment method",
+  "PayTime": "Payment time",
+  "PayComplete": "Complete"
 }

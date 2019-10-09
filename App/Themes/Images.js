@@ -22,6 +22,7 @@ const images = {
   closeButton: require('../Images/Icons/close-button.png'),
 
   LITEXPay: require('../Images/payment/litex-pay.png'),
+  success: require('../Images/payment/success.png'),
 }
 
 export default images
