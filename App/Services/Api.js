@@ -30,9 +30,9 @@ const create = (baseURL = Config.API_URL || 'http://192.168.51.73:7002') => {
   });
 
   api.addResponseTransform(response => {
-    console.log('==========response==========================');
-    console.log(response);
-    console.log('===========response=========================');
+    // console.log('==========response==========================');
+    // console.log(response);
+    // console.log('===========response=========================');
     const { ok } = response
     if (!response || !ok) {
       Toast.show(I18n.t('NetworkError'), {

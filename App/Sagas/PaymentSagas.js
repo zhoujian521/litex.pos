@@ -50,9 +50,9 @@ export function* socketInit(api, { data }) {
   })
 
   socket.on('userPayRes', async (data) => {
-    // console.log('============userPayRes========================');
-    // console.log(data);
-    // console.log('============userPayRes========================');
+    console.log('============userPayRes========================');
+    console.log(data);
+    console.log('============userPayRes========================');
     if (!data) return
     const userId = await DeviceStorage.getItem(Keys.USER_ID)
     const { userId: payUserId } = data
