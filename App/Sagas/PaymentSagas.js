@@ -32,35 +32,38 @@ export function* pleaseOrder(api, { data: params }) {
 }
 
 export function* socketInit(api, { data }) {
-  yield socket = SocketIOClient(Config.API_URL || "http://192.168.51.73:7002", { forceNew: true })
-  global.socket = socket;
-  const userId = yield select(UserSelectors.selectUserId);
+  // yield socket = SocketIOClient(Config.API_URL || "http://192.168.51.73:7002", {
+  //   transports: ['websocket'],
+  //   forceNew: true
+  // })
+  // global.socket = socket;
+  // const userId = yield select(UserSelectors.selectUserId);
+  // socket.on('connect', () => {
+  //   console.log('===========connect=========================');
+  //   console.log(socket);
+  //   console.log(userId);
+  //   console.log('===========connect=========================');
+  //   socket && userId && socket.emit('login', { userId: userId + '' })
+  // })
 
-  socket.on('connect', () => {
-    console.log('===========connect=========================');
-    console.log(userId);
-    console.log('===========connect=========================');
-    socket && userId && socket.emit('login', { userId: userId + '' })
-  })
+  // socket.on('disconnect', () => {
+  //   console.log('===========disconnect=========================');
+  //   console.log(userId);
+  //   console.log('===========disconnect=========================');
+  // })
 
-  socket.on('disconnect', () => {
-    console.log('===========disconnect=========================');
-    console.log(userId);
-    console.log('===========disconnect=========================');
-  })
-
-  socket.on('userPayRes', async (data) => {
-    console.log('============userPayRes========================');
-    console.log(data);
-    console.log('============userPayRes========================');
-    if (!data) return
-    const userId = await DeviceStorage.getItem(Keys.USER_ID)
-    const { userId: payUserId } = data
-    if (payUserId !== userId) return
-    // 是否为当前用户
-    // 用户是否为登录状态
-    EventEmitter.emit(EventKeys.USER_PAY_RES, data);
-    // reduxChannel.put(PaymentActions.update({ payRes: data }))
-    // reduxChannel.put(ConfigActions.update({ isShowModel: true }))
-  })
+  // socket.on('userPayRes', async (data) => {
+  //   console.log('============userPayRes========================');
+  //   console.log(data);
+  //   console.log('============userPayRes========================');
+  //   if (!data) return
+  //   const userId = await DeviceStorage.getItem(Keys.USER_ID)
+  //   const { userId: payUserId } = data
+  //   if (payUserId !== userId) return
+  //   // 是否为当前用户
+  //   // 用户是否为登录状态
+  //   EventEmitter.emit(EventKeys.USER_PAY_RES, data);
+  //   // reduxChannel.put(PaymentActions.update({ payRes: data }))
+  //   // reduxChannel.put(ConfigActions.update({ isShowModel: true }))
+  // })
 }

@@ -33,9 +33,9 @@ export const ConfigSelectors = {
 
 /* ------------- Reducers ------------- */
 export const update = (state, { data }) => {
-  console.log('============data========================');
-  console.log(data);
-  console.log('============data========================');
+  // console.log('============data========================');
+  // console.log(data);
+  // console.log('============data========================');
   return state.merge({ ...data })
 }
 

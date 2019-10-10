@@ -65,9 +65,11 @@ ios/Podfile.lock
 ios/Pods/
 ios/main.jsbundle.meta
 
+android/release.keystore
 android/keystore.propertiess
 android/app/src/main/res/drawable*
 android/app/release
+android/app/build/outputs
 
 .env.production
 .env.staging
